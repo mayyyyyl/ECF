@@ -1,14 +1,16 @@
 from flask import Flask
-from peewee import *
 from playhouse.flask_utils import FlaskDB
 from datetime import datetime
+from peewee import *
+import os
 
+DATABASE = os.environ.get('DATABASE_URL', 'sqlite:///database.db')
 
 app = Flask(__name__)
 app.config.from_object(__name__)
 db_wrapper = FlaskDB(app)
 
-contacts_db = SqliteDatabase('database.db')
+# contacts_db = SqliteDatabase('database.db')
 
 # Définition des modeles
 
@@ -40,6 +42,7 @@ class Gerant(db_wrapper.Model):
         self.updated = datetime.now()
         return super(Gerant, self).save(*args, **kwargs)
 
+
 class Suite(db_wrapper.Model):
     titre = CharField()
     img = BigBitField()
@@ -51,6 +54,7 @@ class Suite(db_wrapper.Model):
     def save(self, *args, **kwargs):
         self.updated = datetime.now()
         return super(Suite, self).save(*args, **kwargs)
+
 
 class Client(db_wrapper.Model):
     lastname = CharField()
@@ -66,6 +70,7 @@ class Client(db_wrapper.Model):
     def fullname(self):
         return f'{self.firstname} {self.lastname}'
 
+
 class Reservation(db_wrapper.Model):
     id_suite = ForeignKeyField(Hotel, backref='suite')
     id_client = ForeignKeyField(Hotel, backref='client')
@@ -75,3 +80,10 @@ class Reservation(db_wrapper.Model):
     def save(self, *args, **kwargs):
         self.updated = datetime.now()
         return super(Reservation, self).save(*args, **kwargs)
+
+# Import des Blueprints
+
+
+from index import index_api
+
+app.register_blueprint(index_api)
