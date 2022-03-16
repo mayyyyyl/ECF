@@ -21,7 +21,7 @@ def hotel_list():
 
 @index_api.route("/hotels/hotel")
 def hotel_info():
-    """ Renvoie information d'un hotel """
+    """ Renvoie les informations d'un hotel """
 
     hotelid = request.args.get('hotelid')
 
@@ -31,9 +31,5 @@ def hotel_info():
         abort(404, "Hotel inexistant")
 
     suites = Suite.select().where(Suite.hotel == hotelid)
-    print(suites)
-
-    # for r in suites:
-    #     print(r.name)
 
     return render_template("hotel_info.html", suites=suites)

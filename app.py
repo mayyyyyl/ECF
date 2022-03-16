@@ -91,9 +91,11 @@ class Reservation(db_wrapper.Model):
 
 from index import index_api
 from debug import *
+from reservation import reservation_api
 
 app.register_blueprint(index_api)
 app.register_blueprint(debug_api)
+app.register_blueprint(reservation_api)
 
 
 @app.cli.command("init_db")

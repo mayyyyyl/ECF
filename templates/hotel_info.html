@@ -1,6 +1,25 @@
 {% extends "footer.html" %}
 {% block content %}
-{% for suite in suites %}
-{{ suite.titre }}
-{% endfor %}
+<h1>Nos Suites</h1>
+<div class="container">
+    <div class="row">
+        {% for suite in suites %}
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <img class="card-img-top" src="{{ suite.img }}" alt="photo de la suite">
+                <div class="card-body">
+                    <h4 class="card-title">{{ suite.tire }}</h4>
+                    <p class="card-subtitle">{{ suite.link }}</p>
+                    <p class="card-text"> {{ suite.description }}</p>
+                    <p class="card-price"> {{ suite.price }}</p>
+                    <form action="/reservation" method="get">
+                        <input for="suiteid" type="hidden" name="suiteid" value="{{ suite.id }}"></input>
+                        <button type="submit" formmethod="get" class="btn btn-primary">Reserver</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends "footer.html" %}
+{% block content %}
+<h1>Réservation</h1>
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 p-4 m-auto">
+                <label for="suiteIdSelected" class="form-label">Suite :</label>
+                <select class="form-select" name="suiteIdSelected" required>
+                    {% for suite in suites %}
+                    <option value="{{ suite.id }}">{{ suite.titre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row md-3 p-4">
+            <div class="col-md-6 p-4 m-auto text-center">
+                <label class="form_label" for="start">Date de début :</label>
+                <input type="date" name="start" required>
+
+            </div>
+            <div class="col-md-6 p-4 m-auto text-center">
+                <label class="form_label" for="end">Date de fin :</label>
+                <input type="date" name="end" required>
+            </div>
+        </div>
+        <div class="col-12 text-center p-4">
+            <button type="submit" class="btn btn-primary" formmethod="post">Envoyer</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
