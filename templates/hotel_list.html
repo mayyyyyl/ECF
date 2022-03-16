@@ -1,0 +1,24 @@
+{% extends "footer.html" %}
+{% block content %}
+<h1>Nos Etablisements</h1>
+<div class="container">
+    <div class="row">
+        {% for hotel in hotels %}
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <img class="card-img-top" src="/static/img/hotel.jpg" alt="photo de l'hotel">
+                <div class="card-body">
+                    <h4 class="card-title">{{ hotel.name }}</h4>
+                    <p class="card-subtitle">{{ hotel.address }}</p>
+                    <p class="card-text"> {{ hotel.description }}</p>
+                    <form action="/hotels/hotel" method="get">
+                        <input for="hotelid" type="hidden" name="hotelid" value="{{ hotel.id }}"></input>
+                        <button type="submit" formmethod="get" class="btn btn-primary">En savoir plus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

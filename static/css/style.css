@@ -1,1 +1,18 @@
 /* Feuille de style */
+
+/* font style */
+@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
+
+/*------------------- Style page -------------------*/
+* {
+    font-family: 'Hind', sans-serif;
+}
+html {
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+.card-img-top {
+    width: 15vw;
+}
