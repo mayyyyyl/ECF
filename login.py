@@ -64,6 +64,8 @@ def admin_required(view):
         """ Vérifie user connecté est un administrateur """
 
         isadmin = Admin.select().where(Admin.id == current_user.id).get_or_none()
+        print(isadmin)
+
         if isadmin is None:
             flash('Vous devez être connecté en tant qu\'administrateur')
             return redirect(url_for('login_api.login'))

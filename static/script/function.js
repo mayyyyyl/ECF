@@ -8,14 +8,13 @@ btn_checkdate.addEventListener('click', () => {
 async function verificationDate() {
 
     let resp = await fetch("/api/reservation");
-    let reservations = await resp.json();
-
-    console.log(reservations);
 
     if (resp.status == 204) {
         reponse.innerHTML = "Réservation possible à ces dates"
     }
     else {
+        let reservations = await resp.json();
+        console.log(reservations);
         reponse.innerHTML = "Réservation pas possible à ces dates"
     }
 

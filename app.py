@@ -43,8 +43,8 @@ class Admin(db_wrapper.Model):
     user = ForeignKeyField(User, backref='admin')
 
 
-class Client(db_wrapper.Model):
-    user = ForeignKeyField(User, backref='client')
+class Customer(db_wrapper.Model):
+    user = ForeignKeyField(User, backref='customer')
 
 
 class Hotel(db_wrapper.Model):
@@ -80,7 +80,7 @@ class Suite(db_wrapper.Model):
 
 class Reservation(db_wrapper.Model):
     suite = ForeignKeyField(Hotel, backref='reservation')
-    client = ForeignKeyField(Client, backref='reservation')
+    customer = ForeignKeyField(Customer, backref='reservation')
     datebeginning = DateTimeField()
     dateend = DateTimeField()
     updated = DateTimeField(default=datetime.now)
@@ -109,7 +109,7 @@ def init_db():
 
     try:
         with db_wrapper.database:
-            db_wrapper.database.create_tables([User, Admin, Gerant, Hotel, Suite, Client, Reservation])
+            db_wrapper.database.create_tables([User, Admin, Gerant, Hotel, Suite, Customer, Reservation])
 
         first = click.prompt('Your first name', type=str)
         last = click.prompt('Your last name', type=str)

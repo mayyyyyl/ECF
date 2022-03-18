@@ -1,5 +1,6 @@
 from flask import Blueprint, abort, request, render_template, flash, jsonify
-from app import Suite, Reservation
+from flask_login import current_user, login_required
+from app import Suite, Reservation, Customer
 from datetime import datetime
 import pendulum
 
@@ -7,6 +8,7 @@ reservation_api = Blueprint('reservation_api', __name__)
 
 
 @reservation_api.route("/reservation", methods=['GET', 'POST'])
+@login_required
 def reservation():
     """ Renvoie au formulaire pour réserver """
 
@@ -27,7 +29,15 @@ def reservation():
         end = str_to_datetime(request.form.get('end'))
 
         try:
-            Reservation.create(suite=suite, client=1, datebeginning=start, dateend=end)
+            customer = Customer.select().where(Customer.user == current_user.id)
+            print("current user id:" + current_user.id)
+            print("customer id:" + customer.id, "customer user id:" + customer.user)
+        except Exception:
+            flash("Vous n'êtes pas connecté avec un compte client")
+            return 'ok pas client'
+
+        try:
+            Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
         except Exception:
             flash("Une erreur inconnue est survenue")
             return 'ok erreur inconnue'
@@ -35,12 +45,13 @@ def reservation():
     else:
 
         suites = Suite.select()
-        reservation = Reservation.select().where(Reservation.suite == suiteid)
-        # rajouter where(Reservation.client == current_user.id)
+        customer = Customer.select().where(Customer.user == current_user.id)
+        reservation = Reservation.select().where(Reservation.suite == suiteid, Reservation.customer == 1)
         return render_template("reservation.html", suites=suites, reservation=reservation)
 
 
 @reservation_api.route("/api/reservation")
+@login_required
 def checkdate():
     """ Vérifie s'il n'y a pas déjà une réservation à ces dates """
 
@@ -48,6 +59,7 @@ def checkdate():
     # print(suiteid)
 
     reservations = Reservation.select().where(Reservation.suite == 1)
+    # reservations_nb = Reservation.select().where(Reservation.suite == 1).count()
 
     if reservations:
         for r in reservations:
