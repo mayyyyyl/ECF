@@ -23,10 +23,26 @@
                 <label class="form_label" for="end">Date de fin :</label>
                 <input type="date" name="end" required>
             </div>
+            <div>
+                <p id="message_verification"></p>
+            </div>
         </div>
-        <div class="col-12 text-center p-4">
+        <div class="col-12 text-center p-4" style="display: none;">
             <button type="submit" class="btn btn-primary" formmethod="post">Envoyer</button>
         </div>
     </div>
 </form>
+<div class="col-12 text-center p-4">
+    <button class="btn btn-primary" id="check_date">Vérifier les disponibilités</button>
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="container justify-content-md-center" id="flash">
+    <p id="flash_message">{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<script src="/static/script/function.js"></script>
 {% endblock %}

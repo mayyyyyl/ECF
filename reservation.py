@@ -1,6 +1,7 @@
-from flask import Blueprint, abort, request, render_template, flash
+from flask import Blueprint, abort, request, render_template, flash, jsonify
 from app import Suite, Reservation
 from datetime import datetime
+import pendulum
 
 reservation_api = Blueprint('reservation_api', __name__)
 
@@ -37,3 +38,31 @@ def reservation():
         reservation = Reservation.select().where(Reservation.suite == suiteid)
         # rajouter where(Reservation.client == current_user.id)
         return render_template("reservation.html", suites=suites, reservation=reservation)
+
+
+@reservation_api.route("/api/reservation")
+def checkdate():
+    """ Vérifie s'il n'y a pas déjà une réservation à ces dates """
+
+    # suiteid = request.form.get('suiteIdSelected')
+    # print(suiteid)
+
+    reservations = Reservation.select().where(Reservation.suite == 1)
+
+    if reservations:
+        for r in reservations:
+            ret = {}
+            ret['start'] = pendulum.instance(r.datebeginning, 'Europe/Paris')
+
+            try:
+                ret['end'] = pendulum.instance(r.dateend, 'Europe/Paris')
+
+            except ValueError:
+                flash('Une erreur est survenue pendant la vérification')
+
+            ret['reservationId'] = r.id
+
+            return jsonify(ret)
+    else:
+        # pas de reservation sur cette suite
+        return "", 204
