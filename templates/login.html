@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Connexion{% endblock %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 p-1 text-align-center">
+                <img class="logo" alt="logo" src="">
+            </div>
+            <form method="post">
+                <div class="form-group">
+                    <label for="inputEmail" class="col form_label">Email</label>
+                    <div class="text-center">
+                        <input type="email" class="form-control-lg" id="inputEmail" placeholder="email@example.com"
+                            name="email" required>
+                    </div>
+                    <label for="inputPassword" class="col form_label">Password</label>
+                    <div class="text-center">
+                        <input type="password" class="form-control-lg" id="inputPassword" placeholder="Password"
+                            name="mdp" required>
+                    </div>
+                    <button type="submit" class="btn btn-lg send_form" id="submit" value="Submit">Envoyer</button>
+                </div>
+            </form>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="container justify-content-md-center" id="flash">
+                <p id="flash_message">{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+</main>
+{% endblock %}
