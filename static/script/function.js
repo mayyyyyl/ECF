@@ -7,14 +7,25 @@ btn_checkdate.addEventListener('click', () => {
 
 async function verificationDate() {
 
-    let resp = await fetch("/api/reservation");
+    let url = new URL('/api/reservation', window.location.origin);
+    url.searchParams.append('suiteId', suiteIdSelected.value);
+    url.searchParams.append('start', start.value);
+    url.searchParams.append('end', end.value);
+
+    let resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+        },
+        body: `suiteId=${suiteIdSelected.value}&start=${start.value}&end=${end.value}`
+    });
 
     if (resp.status == 204) {
         reponse.innerHTML = "Réservation possible à ces dates"
     }
     else {
-        let reservations = await resp.json();
-        console.log(reservations);
+        let messages = await resp.json();
+        console.log(messages);
         reponse.innerHTML = "Réservation pas possible à ces dates"
     }
 

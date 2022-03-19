@@ -1,8 +1,8 @@
 from flask import Blueprint, abort, request, render_template, flash, jsonify
 from flask_login import current_user, login_required
-from app import Suite, Reservation, Customer
+from app import Hotel, Suite, Reservation, Customer
 from datetime import datetime
-import pendulum
+from utils_date import *
 
 reservation_api = Blueprint('reservation_api', __name__)
 
@@ -28,51 +28,63 @@ def reservation():
         start = str_to_datetime(request.form.get('start'))
         end = str_to_datetime(request.form.get('end'))
 
-        try:
-            customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
-        except Exception:
+        customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
+        if customer is None:
             flash("Vous n'êtes pas connecté avec un compte client")
             return 'ok pas client'
-
-        try:
-            Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
-        except Exception:
-            flash("Une erreur inconnue est survenue")
-            return 'ok erreur inconnue'
-        return 'ok'
+        else:
+            try:
+                Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
+            except Exception:
+                flash("Une erreur inconnue est survenue")
+                return 'ok erreur inconnue'
+            return 'ok'
     else:
 
-        suites = Suite.select()
-        customer = Customer.select().where(Customer.user == current_user.id)
-        reservation = Reservation.select().where(Reservation.suite == suiteid, Reservation.customer == current_user.id)
-        return render_template("reservation.html", suites=suites, reservation=reservation)
+        suites = Suite.select(Suite, Hotel).join(Hotel).where(Suite.hotel == Hotel.id)
+        return render_template("reservation.html", suites=suites)
 
 
-@reservation_api.route("/api/reservation")
+@reservation_api.route("/api/reservation", methods=['POST'])
 @login_required
 def checkdate():
     """ Vérifie s'il n'y a pas déjà une réservation à ces dates """
 
-    # suiteid = request.form.get('suiteIdSelected')
-    # print(suiteid)
+    str_to_datetime = lambda x: datetime.strptime(x, "%Y-%m-%d")
 
-    reservations = Reservation.select().where(Reservation.suite == 1)
-    # reservations_nb = Reservation.select().where(Reservation.suite == 1).count()
+    suiteid = request.form.get('suiteId')
+    start = request.form.get('start')
+    end = request.form.get('end')
+
+    if not suiteid:
+        abort(400, 'Missing arguments')
+
+    reservations = Reservation.select().where(Reservation.suite == suiteid)
 
     if reservations:
-        for r in reservations:
-            ret = {}
-            ret['start'] = pendulum.instance(r.datebeginning, 'Europe/Paris')
+        try:
+            suiteid = int(suiteid)
+            start = str_to_datetime(start)
+            end = str_to_datetime(end)
+        except Exception as error:
+            print(error)
+            abort(400, "Echec dans la récupération des données")
 
-            try:
-                ret['end'] = pendulum.instance(r.dateend, 'Europe/Paris')
+        tests = []
 
-            except ValueError:
-                flash('Une erreur est survenue pendant la vérification')
+        tests.append(valideperiod(start, end))
+        tests.append(periodlength(start, end))
+        tests.append(pastperiod(start))
+        tests.append(pastperiod(end))
+        tests.append(overlapperiod(suiteid, start))
+        tests.append(overlapperiod(suiteid, end))
 
-            ret['reservationId'] = r.id
+        print("tests faits")
 
-            return jsonify(ret)
+        if not all(tests):
+            return jsonify(message_error)
+        else:
+            return "", 204
     else:
         # pas de reservation sur cette suite
         return "", 204
