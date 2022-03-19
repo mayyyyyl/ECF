@@ -96,11 +96,13 @@ from index import index_api
 from debug import *
 from reservation import reservation_api
 from login import *
+from user import *
 
 app.register_blueprint(index_api)
 app.register_blueprint(debug_api)
 app.register_blueprint(reservation_api)
 app.register_blueprint(login_api)
+app.register_blueprint(user_api)
 
 
 @app.cli.command("init_db")
@@ -116,11 +118,15 @@ def init_db():
         password = click.prompt('Your password', type=str, hide_input=True)
         email = click.prompt('Your email address', type=str)
 
-        newuser = User.create(firstname=first, lastname=last, email=email, password=hashingpassword(password))
-        Admin.create(user=newuser.id)
-
         newhotel = Hotel.create(name='Mon premier Hotel', address='9 Rue de la Fontaine Grillée', city='La Haie-Fouassière', description='ipsum in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque')
         Suite.create(titre='Suite de reve', img='/static/img/hotel.jpg', description='description de la suite', price='300', link='https://www.booking.com/hotel/fr/holiday-home-bucolique.fr.html?aid=390156;label=duc511jc-1DCAsoTUIWaG9saWRheS1ob21lLWJ1Y29saXF1ZUgzWANoTYgBAZgBDbgBF8gBDNgBA-gBAYgCAagCA7gC3OLIkQbAAgHSAiQ1NTI1NmFkOC00Y2MzLTQ4MjAtYmNlNC1hM2RiYzFkOTJkM2LYAgTgAgE;sid=2b3a5887ae5f0c86c2fcc89e7a12a735;dist=0&keep_landing=1&sb_price_type=total&type=total&', hotel=newhotel.id)
+
+        newadmin = User.create(firstname=first, lastname=last, email=email, password=hashingpassword(password))
+        newclient = User.create(firstname='paul', lastname='Dupont', email='paul@email.fr', password=hashingpassword('paul'))
+        newgerant = User.create(firstname='jean', lastname='Dupont', email='jean@email.fr', password=hashingpassword('jean'))
+        Admin.create(user=newadmin.id)
+        Customer.create(user=newclient.id)
+        Gerant.create(user=newgerant.id, hotel=newhotel.id)
 
     except Exception:
         click.echo('Une erreur s\'est produite.')

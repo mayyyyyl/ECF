@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Créer un compte{% endblock %}
+{% block content %}
+<form class="row mb-3">
+    <div class="col-md-6">
+        <label for="first" class="form-label form_label">Prénom</label>
+        <input type="text" class="form-control" name="first" placeholder="Prénom" required maxlength="50">
+    </div>
+    <div class="col-md-6">
+        <label for="last" class="form-label form_label">Nom</label>
+        <input type="text" class="form-control" name="last" placeholder="Nom" required maxlength="50">
+    </div>
+    <div class="col-md-4">
+        <label for="email" class="form-label form_label">Email</label>
+        <input type="email" class="form-control" name="email" placeholder="exemple@email.fr" required maxlength="50">
+    </div>
+    <div class="col-md-4">
+        <label for="password" class="form-label form_label">Mot de passe</label>
+        <input type="password" class="form-control" name="password" placeholder="mot de passe" required maxlength="50">
+    </div>
+    <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary" formmethod="post">Créer</button>
+    </div>
+</form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="container justify-content-md-center" id="flash">
+    {% for message in messages %}
+    <p id="flash_message">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}

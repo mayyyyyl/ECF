@@ -29,9 +29,7 @@ def reservation():
         end = str_to_datetime(request.form.get('end'))
 
         try:
-            customer = Customer.select().where(Customer.user == current_user.id)
-            print("current user id:" + current_user.id)
-            print("customer id:" + customer.id, "customer user id:" + customer.user)
+            customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
         except Exception:
             flash("Vous n'êtes pas connecté avec un compte client")
             return 'ok pas client'
@@ -46,7 +44,7 @@ def reservation():
 
         suites = Suite.select()
         customer = Customer.select().where(Customer.user == current_user.id)
-        reservation = Reservation.select().where(Reservation.suite == suiteid, Reservation.customer == 1)
+        reservation = Reservation.select().where(Reservation.suite == suiteid, Reservation.customer == current_user.id)
         return render_template("reservation.html", suites=suites, reservation=reservation)
 
 
