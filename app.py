@@ -3,6 +3,10 @@ from playhouse.flask_utils import FlaskDB
 from datetime import datetime
 from peewee import *
 from utils import hashingpassword
+# from flask_admin import Admin
+# from flask_peewee.auth import Auth
+# from flask_peewee.db import Database
+# from flask_peewee.admin import Admin
 import click
 import flask_login
 
