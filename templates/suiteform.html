@@ -1,0 +1,39 @@
+{% extends "footer.html" %}
+{% block title %}Ajouter une suite{% endblock %}
+{% block content %}
+<form class="row mb-3">
+    <div class="col-md-6">
+        <label for="titre" class="form-label form_label">Titre</label>
+        <input type="text" class="form-control" name="titre" placeholder="titre" required maxlength="50">
+    </div>
+    <div class="col-md-6">
+        <label for="price" class="form-label form_label">Price</label>
+        <input type="text" class="form-control" name="price" placeholder="Prix" required maxlength="10">
+    </div>
+    <div class="col-md-4">
+        <label for="description" class="form-label form_label">Description</label>
+        <input type="text" class="form-control" name="description" placeholder="description" required maxlength="500">
+    </div>
+    <div class="col-md-4">
+        <label for="link" class="form-label form_label">Lien Booking</label>
+        <input type="text" class="form-control" name="link" placeholder="url de la page booking" required
+            maxlength="150">
+    </div>
+    <div class="col-md-4">
+        <label for="img">Photo de la suite</label>
+        <input type="file" name="img" accept="image/png, image/jpeg" required>
+    </div>
+    <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary" formmethod="post">Ajouter</button>
+    </div>
+</form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="container justify-content-md-center" id="flash">
+    {% for message in messages %}
+    <p id="flash_message">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}

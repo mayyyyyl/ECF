@@ -46,3 +46,15 @@ def checkpassword(password):
             Speciaux += 1
 
     return all([Minus, Majus, Chiffres, Speciaux])
+
+# Vérifie les entrées de float
+
+
+def convertingfloat(nb_float):
+
+    try:
+        floatrate = float(nb_float.replace(',', '.'))
+        return floatrate
+
+    except Exception:
+        return None

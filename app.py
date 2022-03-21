@@ -96,13 +96,15 @@ from index import index_api
 from debug import *
 from reservation import reservation_api
 from login import *
-from user import *
+from user import user_api
+from suite import suite_api
 
 app.register_blueprint(index_api)
 app.register_blueprint(debug_api)
 app.register_blueprint(reservation_api)
 app.register_blueprint(login_api)
 app.register_blueprint(user_api)
+app.register_blueprint(suite_api)
 
 
 @app.cli.command("init_db")
