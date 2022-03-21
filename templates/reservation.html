@@ -5,8 +5,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 p-4 m-auto">
+                <label for="suiteIdSelected" class="form-label">Hotel :</label>
+                <select class="form-select" name="suiteIdSelected" disabled required>
+                    {% for suite in suites %}
+                    <option value="{{ suite.hotel }}">{{ suite.hotel.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 p-4 m-auto">
                 <label for="suiteIdSelected" class="form-label">Suite :</label>
-                <select class="form-select" name="suiteIdSelected" required>
+                <select class="form-select" name="suiteIdSelected" id="suiteIdSelected" required>
                     {% for suite in suites %}
                     <option value="{{ suite.id }}">{{ suite.titre }}</option>
                     {% endfor %}
@@ -16,24 +24,24 @@
         <div class="row md-3 p-4">
             <div class="col-md-6 p-4 m-auto text-center">
                 <label class="form_label" for="start">Date de début :</label>
-                <input type="date" name="start" required>
+                <input type="date" name="start" id="start" required>
 
             </div>
             <div class="col-md-6 p-4 m-auto text-center">
                 <label class="form_label" for="end">Date de fin :</label>
-                <input type="date" name="end" required>
+                <input type="date" name="end" id="end" required>
             </div>
             <div>
                 <p id="message_verification"></p>
             </div>
         </div>
-        <div class="col-12 text-center p-4" style="display: none;">
+        <div class="col-12 text-center p-4">
             <button type="submit" class="btn btn-primary" formmethod="post">Envoyer</button>
         </div>
     </div>
 </form>
 <div class="col-12 text-center p-4">
-    <button class="btn btn-primary" id="check_date">Vérifier les disponibilités</button>
+    <button class="btn btn-primary" id="check_date" formmethod="post">Vérifier les disponibilités</button>
 </div>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
