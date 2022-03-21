@@ -46,3 +46,20 @@ def checkpassword(password):
             Speciaux += 1
 
     return all([Minus, Majus, Chiffres, Speciaux])
+
+
+def checkurl(url):
+    regex = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)$"
+    return re.match(regex, url)
+
+# Vérifie les entrées de float
+
+
+def convertingfloat(nb_float):
+
+    try:
+        floatrate = float(nb_float.replace(',', '.'))
+        return floatrate
+
+    except Exception:
+        return None
