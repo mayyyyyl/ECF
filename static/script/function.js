@@ -24,9 +24,12 @@ async function verificationDate() {
         reponse.innerHTML = "Réservation possible à ces dates"
     }
     else {
-        let messages = await resp.json();
-        console.log(messages);
-        reponse.innerHTML = "Réservation pas possible à ces dates"
+        messages = await resp.json();
+        let html;
+        for (i = 0; i < messages.length; i++) {
+            html += '<p>' + messages[i] + '</p>';
+        };
+        reponse.innerHTML = html
     }
 
 }

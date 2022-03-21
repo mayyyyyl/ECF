@@ -62,6 +62,7 @@ def checkdate():
     reservations = Reservation.select().where(Reservation.suite == suiteid)
 
     if reservations:
+
         try:
             suiteid = int(suiteid)
             start = str_to_datetime(start)
@@ -71,15 +72,13 @@ def checkdate():
             abort(400, "Echec dans la récupération des données")
 
         tests = []
+        message_error.clear()
 
         tests.append(valideperiod(start, end))
         tests.append(periodlength(start, end))
-        tests.append(pastperiod(start))
-        tests.append(pastperiod(end))
+        tests.append(pastperiod(start, end))
         tests.append(overlapperiod(suiteid, start))
         tests.append(overlapperiod(suiteid, end))
-
-        print("tests faits")
 
         if not all(tests):
             return jsonify(message_error)

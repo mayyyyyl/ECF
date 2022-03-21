@@ -2,6 +2,7 @@ from flask import flash, redirect, url_for
 from app import Reservation
 from datetime import datetime, timedelta
 
+
 message_error = []
 # Vérifie que start < end
 
@@ -15,8 +16,8 @@ def valideperiod(start, end):
 # Vérifie date n'est pas le futur
 
 
-def pastperiod(date):
-    if date < datetime.now():
+def pastperiod(start, end):
+    if start < datetime.now() or end < datetime.now():
         message_error.append("Période dans le passé")
         return False
     return True
