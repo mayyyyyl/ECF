@@ -1,12 +1,11 @@
 from flask import Flask
+from peewee import *
 from playhouse.flask_utils import FlaskDB
 from datetime import datetime
-from peewee import *
 from utils import hashingpassword
-# from flask_admin import Admin
-# from flask_peewee.auth import Auth
-# from flask_peewee.db import Database
-# from flask_peewee.admin import Admin
+from flask_admin import *
+from flask_admin.model import BaseModelView
+from flask_admin.contrib.peewee import ModelView
 import click
 import flask_login
 
@@ -21,8 +20,14 @@ db_wrapper = FlaskDB(app)
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
 
+admin = Admin(app, name='Easy Admin ', template_mode='bootstrap4')
+
+
+# class MyModelView(BaseModelView):
+#     column_filters = ('user', 'hotel')
 
 # Définition des modeles
+
 
 class User(db_wrapper.Model, flask_login.UserMixin):
     lastname = CharField()
@@ -94,6 +99,19 @@ class Reservation(db_wrapper.Model):
         return super(Reservation, self).save(*args, **kwargs)
 
 # Import des Blueprints
+
+# admin.add_view(ModelView(User, db.session))
+# admin.add_view(ModelView(Hotel))
+
+
+class HotelView(ModelView):
+    column_exclude_list = ['id']
+    # model_form_converter = CustomModelConverter
+    # filter_converter = filters.FilterConverter()
+    fast_mass_delete = False
+
+
+admin.add_view(HotelView(Hotel))
 
 
 from index import index_api
