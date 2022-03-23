@@ -1,4 +1,4 @@
-from flask import Blueprint, request, flash, redirect, url_for, render_template
+from flask import Blueprint, request, flash, redirect, url_for, render_template, jsonify
 from flask_login import current_user, login_required
 from login import gerant_required
 from utils import *
@@ -56,3 +56,25 @@ def suite_add():
 
     else:
         return render_template('suiteform.html', suite=None)
+
+
+@suite_api.route("/api/suites")
+@login_required
+def get_suites():
+
+    hotelid = request.args.get('hotelId')
+
+    query = Suite.select().where(Suite.hotel == hotelid)
+
+    if query.count() > 0:
+        liste = []
+        for suite in query:
+            data = {}
+            data['id'] = suite.id
+            data['titre'] = suite.titre
+
+            liste.append(data)
+
+        return jsonify(liste)
+    else:
+        return "", 204

@@ -41,8 +41,9 @@ def reservation():
             return 'ok'
     else:
 
-        suites = Suite.select(Suite, Hotel).join(Hotel).where(Suite.hotel == Hotel.id)
-        return render_template("reservation.html", suites=suites)
+        # suites = Suite.select(Suite, Hotel).join(Hotel).where(Suite.hotel == Hotel.id)
+        hotels = Hotel.select()
+        return render_template("reservation.html", hotels=hotels)
 
 
 @reservation_api.route("/api/reservation", methods=['POST'])
