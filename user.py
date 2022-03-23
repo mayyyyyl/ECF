@@ -1,5 +1,6 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template
 from utils import *
+from peewee import IntegrityError
 from app import User, Customer
 
 user_api = Blueprint('user_api', __name__)

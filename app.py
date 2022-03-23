@@ -3,11 +3,11 @@ from peewee import *
 from playhouse.flask_utils import FlaskDB
 from datetime import datetime
 from utils import hashingpassword
-from flask_admin import *
-from flask_admin.model import BaseModelView
+from flask_admin import Admin
 from flask_admin.contrib.peewee import ModelView
 import click
 import flask_login
+# from flask_appbuilder import expose
 
 login_manager = flask_login.LoginManager()
 
@@ -16,15 +16,13 @@ SECRET_KEY = '3RreRxY4kKWqUAq4'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+
 db_wrapper = FlaskDB(app)
+
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
 
 admin = Admin(app, name='Easy Admin ', template_mode='bootstrap4')
-
-
-# class MyModelView(BaseModelView):
-#     column_filters = ('user', 'hotel')
 
 # Définition des modeles
 
@@ -42,6 +40,10 @@ class User(db_wrapper.Model, flask_login.UserMixin):
 
     def get_id(self):
         return str(self.id)
+
+    @property
+    def is_authenticated(self):
+        return True
 
     @property
     def fullname(self):
@@ -98,10 +100,29 @@ class Reservation(db_wrapper.Model):
         self.updated = datetime.now()
         return super(Reservation, self).save(*args, **kwargs)
 
-# Import des Blueprints
 
-# admin.add_view(ModelView(User, db.session))
-# admin.add_view(ModelView(Hotel))
+# class AllView(ModelView):
+
+#     def is_accessible(self):
+#         return login.current_user.is_authenticated
+
+#     def inaccessible_callback(self, name, **kwargs):
+#         return redirect(url_for('login_api.login'))
+# from flask_login.utils import current_user
+
+
+# class MyView(ModelView):
+#     @expose('/')
+#     def index(self):
+#         return self.render('admin/index.html')
+
+#     def is_accessible(self):
+#         return current_user.is_authenticated()
+
+# admin.add_view(MyView(ModelView))
+admin.add_view(ModelView(Gerant))
+admin.add_view(ModelView(User))
+admin.add_view(ModelView(Suite))
 
 
 class HotelView(ModelView):
@@ -112,6 +133,9 @@ class HotelView(ModelView):
 
 
 admin.add_view(HotelView(Hotel))
+
+
+# Import des Blueprints
 
 
 from index import index_api
@@ -127,6 +151,8 @@ app.register_blueprint(reservation_api)
 app.register_blueprint(login_api)
 app.register_blueprint(user_api)
 app.register_blueprint(suite_api)
+
+# Commande permettant d'inisialiser la base de données
 
 
 @app.cli.command("init_db")
