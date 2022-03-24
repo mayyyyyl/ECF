@@ -17,7 +17,7 @@ def login():
         mdp = request.form.get('mdp', '')
 
         if email == '' or mdp == '':
-            flash('Invalid credentials')
+            flash('Email ou mot de passe erroné')
             return redirect(url_for('login_api.login'))
 
         hashed = hashingpassword(mdp)
@@ -26,7 +26,7 @@ def login():
         user = User.get_or_none(User.email == email, User.password == hashed)
 
         if user is None:
-            flash('Invalid credentials')
+            flash('Email ou mot de passe erroné')
             return redirect(url_for('login_api.login'))
 
         else:
@@ -36,7 +36,7 @@ def login():
                 return redirect(nextroute, code=303)
 
             else:
-                flash('Invalid credentials')
+                flash('Email ou mot de passe erroné')
                 return redirect(url_for('login_api.login'))
 
     else:

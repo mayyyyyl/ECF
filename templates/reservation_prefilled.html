@@ -1,0 +1,52 @@
+{% extends "footer.html" %}
+{% block content %}
+<h1>Réservation</h1>
+<form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 p-4 m-auto">
+                <label for="hotelIdSelected" class="form-label">Hotel :</label>
+                <select class="form-select" name="hotelIdSelected" id="hotelIdSelected" disabled="{% if
+                    nexturl==url_for('index_api.hotel_info')%}disabled{% endif %}" required>
+                    <option value="{{ hotel.id }}">{{ hotel.name }}</option>
+                </select>
+            </div>
+            <div class="col-md-6 p-4 m-auto">
+                <label for="suiteIdSelected" class="form-label">Suite :</label>
+                <select class="form-select" name="suiteIdSelected" id="suiteIdSelected" required>
+                    <option value="{{ suite.id }}">{{ suite.titre }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row md-3 p-4">
+            <div class="col-md-6 p-4 m-auto text-center">
+                <label class="form_label" for="start">Date de début :</label>
+                <input type="date" name="start" id="start" required>
+
+            </div>
+            <div class="col-md-6 p-4 m-auto text-center">
+                <label class="form_label" for="end">Date de fin :</label>
+                <input type="date" name="end" id="end" required>
+            </div>
+            <div>
+                <p id="message_verification"></p>
+            </div>
+        </div>
+        <div class="col-12 text-center p-4">
+            <button type="submit" class="btn btn-primary" formmethod="post">Envoyer</button>
+        </div>
+    </div>
+</form>
+<div class="col-12 text-center p-4">
+    <button class="btn btn-primary" id="check_date" formmethod="post">Vérifier les disponibilités</button>
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="container justify-content-md-center" id="flash">
+    <p id="flash_message">{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% endblock %}

@@ -12,9 +12,10 @@
                     <p class="card-subtitle">{{ suite.link }}</p>
                     <p class="card-text"> {{ suite.description }}</p>
                     <p class="card-price"> {{ suite.price }}</p>
-                    <form action="/reservation" method="get">
+                    <form action="/reserver" method="get">
                         <input for="suiteid" type="hidden" name="suiteid" value="{{ suite.id }}"></input>
-                        <button type="submit" formmethod="get" class="btn btn-primary">Reserver</button>
+                        <input for="next" type="hidden" name="next" value="{{ request.path }}"></input>
+                        <button type="submit" formmethod="get" class="btn btn-primary">Réserver</button>
                     </form>
                 </div>
             </div>

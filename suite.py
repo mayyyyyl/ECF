@@ -11,7 +11,7 @@ suite_api = Blueprint('suite_api', __name__)
 @login_required
 @gerant_required
 def suite_add():
-    """ Renvoie le formulaire d'ajout d'une suite (GET), Envoie le formulaire (POST)"""
+    """ Renvoie le formulaire d'ajout d'une suite (GET), Envoie le formulaire (POST) """
 
     if request.method == 'POST':
         titre = request.form.get('titre').title()
@@ -61,6 +61,7 @@ def suite_add():
 @suite_api.route("/api/suites")
 @login_required
 def get_suites():
+    """ Renvoie la liste des suites d'un hotel """
 
     hotelid = request.args.get('hotelId')
 
