@@ -1,0 +1,27 @@
+{% extends "footer.html" %}
+{% block content %}
+<h1>Mes réservations</h1>
+{% if reservations > 1 %}
+{% for reservation in reservations %}
+<div class="total_stat col-12 align-items-center">
+    <img src="">
+    <div class="d-flex flex-column">
+        <p>{{ reservation.suite }}</p>
+        <p>{{ reservation.datebeginning }}</p>
+        <p>{{ reservation.dateend }}</p>
+    </div>
+</div>
+{% endfor %}
+{% elif reservations.count()==1 %}
+<div class="total_stat col-12 align-items-center">
+    <img src="">
+    <div class="d-flex flex-column">
+        <p>{{ reservation.suite }}</p>
+        <p>{{ reservation.datebeginning }}</p>
+        <p>{{ reservation.dateend }}</p>
+    </div>
+</div>
+{% else %}
+<p> Vous n'avez pas de réservation pour le moment </p>
+{% endif %}
+{% endblock %}

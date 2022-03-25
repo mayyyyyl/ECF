@@ -31,6 +31,7 @@ def reservation():
             except Exception:
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('reservation_api.reservation'))
+            return "ok reservation faite"
             return redirect(url_for('reservation_api.reservation'))
     else:
 
@@ -45,20 +46,6 @@ def reservation_prefilled():
 
     # fonction anonyme qui formate la date au format datetimelocal
     str_to_datetime = lambda x: datetime.strptime(x, "%Y-%m-%d")
-
-    try:
-        suiteid = int(request.args.get('suiteid'))
-        nexturl = request.args.get('next')
-
-    except Exception:
-        abort(404, "pas de données")
-
-    print(suiteid)
-
-    try:
-        Suite.get(Suite.id == suiteid)
-    except Exception:
-        abort(404, "Suite inexistant")
 
     if request.method == 'POST':
 
@@ -78,6 +65,16 @@ def reservation_prefilled():
                 return redirect(url_for('reservation_api.reservation_prefilled'))
             return redirect(url_for('reservation_api.reservation_prefilled'))
     else:
+        try:
+            suiteid = int(request.args.get('suiteid'))
+            nexturl = request.args.get('next')
+        except Exception:
+            abort(404, "pas de données")
+
+        try:
+            Suite.get(Suite.id == suiteid)
+        except Exception:
+            abort(404, "Suite inexistant")
 
         suite = Suite.select().where(Suite.id == suiteid).get_or_none()
         hotel = Hotel.select().where(Hotel.id == suite.hotel).get_or_none()
