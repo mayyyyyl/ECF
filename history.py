@@ -12,6 +12,7 @@ def customer_reservations():
     customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
     if not customer:
         flash("Vous devez être connecté avec un compte client")
-    reservations = Reservation.select().where(Reservation.customer == customer.id).get_or_none()
+
+    reservations = Reservation.select().where(Reservation.customer == customer.id)
 
     return render_template("history.html", reservations=reservations)
