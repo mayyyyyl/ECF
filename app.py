@@ -139,18 +139,18 @@ admin.add_view(HotelView(Hotel))
 
 
 from index import index_api
-from debug import *
 from reservation import reservation_api
 from login import *
 from user import user_api
 from suite import suite_api
+from history import history_api
 
 app.register_blueprint(index_api)
-app.register_blueprint(debug_api)
 app.register_blueprint(reservation_api)
 app.register_blueprint(login_api)
 app.register_blueprint(user_api)
 app.register_blueprint(suite_api)
+app.register_blueprint(history_api)
 
 # Commande permettant d'inisialiser la base de données
 

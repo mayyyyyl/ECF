@@ -6,15 +6,15 @@
         <div class="row">
             <div class="col-md-6 p-4 m-auto">
                 <label for="hotelIdSelected" class="form-label">Hotel :</label>
-                <select class="form-select" name="hotelIdSelected" id="hotelIdSelected" onchange=getsuites() required>
-                    {% for hotel in hotels %}
+                <select class="form-select" name="hotelIdSelected" id="hotelIdSelected" disabled="{% if
+                    nexturl==url_for('index_api.hotel_info')%}disabled{% endif %}" required>
                     <option value="{{ hotel.id }}">{{ hotel.name }}</option>
-                    {% endfor %}
                 </select>
             </div>
             <div class="col-md-6 p-4 m-auto">
                 <label for="suiteIdSelected" class="form-label">Suite :</label>
                 <select class="form-select" name="suiteIdSelected" id="suiteIdSelected" required>
+                    <option value="{{ suite.id }}">{{ suite.titre }}</option>
                 </select>
             </div>
         </div>
@@ -49,6 +49,5 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
-<script src="/static/script/suites_list.js"></script>
 <script src="/static/script/function_date.js"></script>
 {% endblock %}
