@@ -63,7 +63,7 @@ def reservation_prefilled():
             except Exception:
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('reservation_api.reservation_prefilled'))
-            return redirect(url_for('reservation_api.reservation_prefilled'))
+            return redirect(url_for('index_api.index'))
     else:
         try:
             suiteid = int(request.args.get('suiteid'))
