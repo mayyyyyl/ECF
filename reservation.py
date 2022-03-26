@@ -31,8 +31,7 @@ def reservation():
             except Exception:
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('reservation_api.reservation'))
-            return "ok reservation faite"
-            return redirect(url_for('reservation_api.reservation'))
+            return redirect(url_for('history_api.customer_reservations'))
     else:
 
         hotels = Hotel.select()
@@ -63,7 +62,7 @@ def reservation_prefilled():
             except Exception:
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('reservation_api.reservation_prefilled'))
-            return redirect(url_for('index_api.index'))
+            return redirect(url_for('history_api.customer_reservations'))
     else:
         try:
             suiteid = int(request.args.get('suiteid'))

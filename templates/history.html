@@ -9,10 +9,23 @@
         <p>{{ r.suite.name }}</p>
         <p>{{ r.datebeginning }}</p>
         <p>{{ r.dateend }}</p>
+        <form action="/delete-reservation" method="post">
+            <input for="reservationid" type="hidden" name="reservationid" value="{{ r.id }}"></input>
+            <button type="submit" formmethod="post" class="btn btn-danger">Supprimer</button>
+        </form>
     </div>
 </div>
 {% endfor %}
 {% else %}
 <p> Vous n'avez pas de réservation pour le moment </p>
 {% endif %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="container justify-content-md-center" id="flash">
+    <p id="flash_message">{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 {% endblock %}

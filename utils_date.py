@@ -1,6 +1,7 @@
 from flask import flash, redirect, url_for
 from app import Reservation
 from datetime import datetime, timedelta
+import pendulum
 
 
 message_error = []
@@ -49,3 +50,16 @@ def overlapperiod(suiteid, date):
             message_error.append("Période qui se chevauche")
             return False
     return True
+
+# Vérifie que la date est pas 3 jours avant la réservation
+
+
+def checkdate(datestart):
+
+    print(pendulum.now())
+    print(pendulum.instance(datestart).add(days=-3))
+
+    if pendulum.now() > pendulum.instance(datestart).add(days=-3):
+        return False
+    else:
+        return True
