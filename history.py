@@ -12,12 +12,13 @@ def customer_reservations():
     """ Renvoie l'ensemble des réservations d'un client """
 
     customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
-    if not customer:
-        flash("Vous devez être connecté avec un compte client")
 
-    reservations = Reservation.select().where(Reservation.customer == customer.id).order_by(Reservation.datebeginning.desc())
-
-    return render_template("history.html", reservations=reservations)
+    if customer:
+        reservations = Reservation.select().where(Reservation.customer == customer.id).order_by(Reservation.datebeginning.desc())
+        return render_template("history.html", reservations=reservations)
+    else:
+        flash("Vous devez être connecté avec un compte client pour accéder à cette page.")
+        return redirect(url_for('index_api.index'))
 
 
 @history_api.route("/delete-reservation", methods=['POST'])

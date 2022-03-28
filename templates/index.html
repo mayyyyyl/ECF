@@ -1,4 +1,13 @@
 {% extends "footer.html" %}
 {% block content %}
-test page d'accueil
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="container justify-content-md-center" id="flash">
+    <p id="flash_message">{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<p>test page d'accueil</p>
 {% endblock %}
