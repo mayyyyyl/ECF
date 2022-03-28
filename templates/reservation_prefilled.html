@@ -33,10 +33,13 @@
             </div>
         </div>
         <div class="col-12 text-center p-4">
-            <button type="submit" class="btn button" formmethod="post">Envoyer</button>
+            <button type="submit" class="btn button" id="send_form" formmethod="post" hidden>Envoyer</button>
         </div>
     </div>
 </form>
+<div class="col-12 text-center p-4">
+    <button class="btn button" id="check_date" formmethod="post">Vérifier les disponibilités</button>
+</div>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
