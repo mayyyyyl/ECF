@@ -4,20 +4,16 @@
 <main class="width=90vh" style="max-width: 1220px; 
 margin: 0 auto !important; ">
     <div class="container-fluid header-admin p-3">
-        <a href="/"><img width="200px" alt="logo hypnos" src="/static/img/logo.png"></a>
-        <a class="logout" href="/logout"><img class="logo" alt="deconnexion"
-                src="/static/img/plus.jpg" />Déconnexion</a>
-    </div>
-    <div class="container-fluid header-admin p-3">
-        <h1><img class="home" src="/static/img/home.jpg" alt="logo home" title="logo home" />Contacter le support</h1>
+        <h1>Contacter le support</h1>
     </div>
     <form>
         <div class="col-12 d-flex flex-column align-items-center p-2">
             <label class="form_label" for="topic">Objet de votre demande</label>
             <select class="form-select mb-5" max-width="30%" name="topic">
-                <option value="problème technique">Problème technique</option>
-                <option value="aide à l'utilisation">Aide à l'utilisation</option>
-                <option value="demande d'amélioration">Demande d'amélioration</option>
+                <option value="réclamation">Je souhaite poser une réclamation</option>
+                <option value="service supplémentaire">Je souhaite commander un service supplémentaire</option>
+                <option value="en savoir plus">Je souhaite en savoir plus sur une suite</option>
+                <option value="soucis application">J’ai un souci avec cette application</option>
             </select>
             <div class="col-md-6 mb-4">
                 <textarea class="form-control" for="message" name="message" rows="5" placeholder="Message"

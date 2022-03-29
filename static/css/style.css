@@ -39,6 +39,10 @@ h1 {
     margin: 0.8rem;
     margin-bottom: 1.2rem;
 }
+.logo {
+    width: 150px;
+    padding: 0.2rem;
+}
 /* Navbar */
 
 .navbar{

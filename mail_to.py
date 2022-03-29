@@ -1,10 +1,11 @@
 from flask import flash, request
 from flask_login import current_user
+from smtp2go.core import Smtp2goClient
 
 
 def send_mail(topic, message):
 
-    client = Smtp2goClient(api_key='api-964C4C04A90311ECAD26F23C91BBF4A0')
+    client = Smtp2goClient(api_key='api-927AEA52AF8111ECBC95F23C91BBF4A0')
 
     payload = {
         'sender': 'maylislb@hotmail.fr',
