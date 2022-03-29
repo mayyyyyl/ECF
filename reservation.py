@@ -2,6 +2,7 @@ from flask import Blueprint, abort, request, render_template, flash, jsonify, re
 from flask_login import current_user, login_required
 from app import Hotel, Reservation, Customer, Suite
 from datetime import datetime
+from login import customer_required
 from utils_date import *
 
 reservation_api = Blueprint('reservation_api', __name__)
@@ -9,6 +10,7 @@ reservation_api = Blueprint('reservation_api', __name__)
 
 @reservation_api.route("/reservation", methods=['GET', 'POST'])
 @login_required
+@customer_required
 def reservation():
     """ Renvoie le formulaire pour reserver (GET), Envoie le formulaire (POST)"""
 
@@ -23,8 +25,8 @@ def reservation():
 
         customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
         if customer is None:
-            flash("Vous n'êtes pas connecté avec un compte client")
-            return redirect(url_for('reservation_api.reservation'))
+            flash("Compte client inexistant")
+            return redirect(url_for('index_api.index'))
         else:
             try:
                 Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
@@ -40,6 +42,7 @@ def reservation():
 
 @reservation_api.route("/reserver", methods=['GET', 'POST'])
 @login_required
+@customer_required
 def reservation_prefilled():
     """ Renvoie le formulaire pour reserver (GET), Envoie le formulaire (POST)"""
 
@@ -54,8 +57,8 @@ def reservation_prefilled():
 
         customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
         if customer is None:
-            flash("Vous n'êtes pas connecté avec un compte client")
-            return redirect(url_for('reservation_api.reservation_prefilled'))
+            flash("Compte client inexistant")
+            return redirect(url_for('index_api.index'))
         else:
             try:
                 Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
@@ -82,6 +85,7 @@ def reservation_prefilled():
 
 @reservation_api.route("/api/reservation", methods=['POST'])
 @login_required
+@customer_required
 def checkdate():
     """ Vérifie s'il n'y a pas déjà une réservation à ces dates """
 

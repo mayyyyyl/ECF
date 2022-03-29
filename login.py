@@ -1,7 +1,7 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template
 from flask_login import login_user, logout_user, current_user
 from utils import hashingpassword
-from app import Gerant, User, Admin, login_manager
+from app import Gerant, User, Admin, Customer, login_manager
 from functools import wraps
 
 login_api = Blueprint('login_api', __name__)
@@ -64,7 +64,6 @@ def admin_required(view):
         """ Vérifie user connecté est un administrateur """
 
         isadmin = Admin.select().where(Admin.user == current_user.id).get_or_none()
-        print(isadmin)
 
         if isadmin is None:
             flash('Vous devez être connecté en tant qu\'administrateur')
@@ -81,10 +80,25 @@ def gerant_required(view):
         """ Vérifie user connecté est un gerant """
 
         isgerant = Gerant.select().where(Gerant.user == current_user.id).get_or_none()
-        print(isgerant)
 
         if isgerant is None:
             flash('Vous devez être connecté en tant que gérant')
+            return redirect(url_for('login_api.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
+def customer_required(view):
+    @wraps(view)
+    def wrapped_view(**kwargs):
+        """ Vérifie user connecté est un customer """
+
+        iscustomer = Customer.select().where(Customer.user == current_user.id).get_or_none()
+
+        if iscustomer is None:
+            flash('Vous devez être connecté en tant que client')
             return redirect(url_for('login_api.login'))
 
         return view(**kwargs)
