@@ -25,6 +25,7 @@ margin: 0 auto !important; ">
             </div>
         </div>
         <div class="col-12 text-center p-4">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <button type="submit" class="btn button" formmethod="post">Envoyer</button>
         </div>
     </form>

@@ -7,6 +7,7 @@ from flask_admin import Admin
 from flask_admin.contrib.peewee import ModelView
 import click
 import flask_login
+from flask_seasurf import SeaSurf
 # from flask_appbuilder import expose
 
 login_manager = flask_login.LoginManager()
@@ -18,6 +19,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 db_wrapper = FlaskDB(app)
+csrf = SeaSurf(app)
 
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"

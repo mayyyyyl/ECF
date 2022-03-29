@@ -19,6 +19,7 @@
         <input type="password" class="form-control" name="password" placeholder="mot de passe" required maxlength="50">
     </div>
     <div class="col-12 text-center">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
         <button type="submit" class="btn btn-primary" formmethod="post">Créer</button>
     </div>
 </form>

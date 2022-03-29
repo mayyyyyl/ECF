@@ -19,6 +19,7 @@
                         <input type="password" class="form-control-lg" id="inputPassword" placeholder="Password"
                             name="mdp" required>
                     </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-lg button" id="submit" value="Submit">Envoyer</button>
                 </div>
             </form>
