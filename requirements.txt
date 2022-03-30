@@ -51,3 +51,4 @@ urllib3==1.26.9
 Werkzeug==2.0.3
 wtf-peewee==3.0.3
 WTForms==2.3.3
+gunicorn
