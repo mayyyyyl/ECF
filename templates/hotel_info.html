@@ -2,16 +2,25 @@
 {% block content %}
 <div class="container">
     <h1>Nos Suites</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p class="explication">Retrouvez ici la liste de nos suites</p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a></div>
+    </div>
     <div class="row">
         {% for suite in suites %}
         <div class="col-lg-4 col-md-12">
             <div class="card">
                 <img class="card-img-top" src="{{ suite.img }}" alt="photo de la suite">
                 <div class="card-body">
-                    <h4 class="card-title">{{ suite.tire }}</h4>
+                    <h4 class="card-title">{{ suite.titre }}</h4>
                     <p class="card-text"> {{ suite.description }}</p>
+                    <p class="card-link"><a href="{{ suite.link }}" target="_blank" class="link_booking">Lien
+                            Booking</a></p>
                     <p class="card-price"> {{ suite.price }} €</p>
-                    <p class="card-subtitle"><a href="{{ suite.link }}" target="_blank">Lien Booking</a></p>
                     <div class="col-md-12 text-center">
                         <form action="/reserver" method="get">
                             <input for="suiteid" type="hidden" name="suiteid" value="{{ suite.id }}"></input>

@@ -1,32 +1,48 @@
 {% extends "navbar.html" %}
 {% block content %}
 <h1>Mes réservations</h1>
-{% if reservations %}
-{% for r in reservations %}
-<div class="total_stat col-12 align-items-center">
-    <img src="">
-    <div class="d-flex flex-column">
-        <p>{{ r.suite.name }}</p>
-        <p>{{ r.datebeginning }}</p>
-        <p>{{ r.dateend }}</p>
-        <form action="/delete-reservation" method="post">
-            <input for="reservationid" type="hidden" name="reservationid" value="{{ r.id }}"></input>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-            <button type="submit" formmethod="post" class="btn btn-danger">Supprimer</button>
-        </form>
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p class="explication">Retrouvez ici l'historique de vos réservations</p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a>
+        </div>
     </div>
+    {% if reservations %}
+    {% for r in reservations %}
+    <div class="total_stat col-12 align-items-center">
+        <img src="">
+        <div class=" container-fluid d-flex flex-column justify-content-center align-items-center">
+            <div class="row">
+                <p class="suite.name">{{ r.suite.name }}</p>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p> Du {{ r.datebeginning|dateformat() }} au {{ r.dateend|dateformat() }}</p>
+                    <form action="/delete-reservation" method="post">
+                        <input for="reservationid" type="hidden" name="reservationid" value="{{ r.id }}"></input>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" formmethod="post" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p> Vous n'avez pas de réservation pour le moment </p>
+    {% endif %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="container justify-content-md-center" id="flash">
+        <p id="flash_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 </div>
-{% endfor %}
-{% else %}
-<p> Vous n'avez pas de réservation pour le moment </p>
-{% endif %}
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-<div class="container justify-content-md-center" id="flash">
-    <p id="flash_message">{{ message }}</p>
-</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
 {% endblock %}

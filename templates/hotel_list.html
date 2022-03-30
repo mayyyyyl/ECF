@@ -2,6 +2,14 @@
 {% block content %}
 <div class="container">
     <h1>Nos Etablisements</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p class="explication">Retrouvez ici la liste de nos établissements</p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a></div>
+    </div>
     <div class="row">
         {% for hotel in hotels %}
         <div class="col-lg-4 col-md-12">
