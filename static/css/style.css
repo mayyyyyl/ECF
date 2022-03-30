@@ -29,24 +29,37 @@ html {
 }
 
 body {
-    background-color: #FFF8DE;
+    background-color: #E1DACC;
 }
 h1 {
-    color: #3F5C6C;
+    color: #d63131;
     text-align: center;
     font-family:'Dancing Script';
     font-weight: 700;
-    margin: 0.8rem;
+    margin: 1.3rem;
+    padding-top: 0.6rem;
     margin-bottom: 1.2rem;
 }
 .logo {
     width: 150px;
     padding: 0.2rem;
 }
+.logout {
+    width: 25px;
+    padding-right: 0.3rem ;
+}
+.logout_link, .logout_link:hover {
+    color: black;
+    text-decoration: none;
+    padding: 0.2rem;
+}
+.explication {
+    color: rgb(133, 133, 133);
+}
 /* Navbar */
 
 .navbar{
-    background-color: white;
+    background-color: whitesmoke;
 }
 .navbar-brand {
     width: 5vw;
@@ -65,45 +78,82 @@ h1 {
 }
 .nav-link{
     font-size: 1.1rem;
+    color: #756b5b;
 }
 .nav-link:hover {
     text-decoration:underline;
     text-underline-offset: 0.5rem;
-    color: rgba(0,0,0,.55);
+    text-decoration-color: #d63131;
+    text-decoration-thickness: .2em;
 }
-
+.dropdown-item:hover {
+    color: #d63131;
+    background-color: #E1DACC;
+}
 /* Card */
 
 .card-title {
-    color: #3F5C6C;
+    color: #d63131;
     font-family: 'Dancing Script';
+    font-size: 1.7em;
     font-weight: 600;
+    text-align: center;
+    margin: 0.5rem;
 }
 .card-subtitle {
-    color: #3F5C6C;
-    opacity: 80%;
+    color: #756b5b;
+    font-size: .9em;
+    margin: 0.8rem;
+    padding-top: 0.5rem;
 }
-.card-text {
-    color: #3F5C6C;
+.card-text, .card-price{
+    font-size: 1rem;
+    margin: .8rem;
+    margin-bottom: 1.2rem;
+}
+.card-price {
+    text-align: center;
+    font-style: italic;
+    font-weight: 600;
+}
+.card-link {
+    margin: .8rem;
+    font-size: .9rem;
+}
+.link_booking {
+    color: #756b5b;
+}
+.link_booking:hover {
+    color: #78BE82;
 }
 .button:hover {
-    background-color: #C9D2DA;
-    color: black;
+    background: #78BE82;
+    color: white;
 }
 .button {
-    background-color: #88471B;
+    margin: .6rem;
+    background: linear-gradient(0.25turn, #d63131, #f16063);
+    border: none;
     color: white;
 }
 /* Footer */
 .footer {
     justify-content: center;
     width: 100%;
+    color: rgb(133, 133, 133);
+}
+.footer_link, .create_account:hover {
+    color: rgb(133, 133, 133);
+}
+.footer_link:hover, .create_account {
+    color: #d63131;
 }
 /* login */
 .form-select {
     margin-top: 2rem;
     max-width: 50%;
     margin: auto;
+    border-color: #d63131;
 }
 .form-select:disabled {
     border: 1px solid #999999;
@@ -129,6 +179,6 @@ h1 {
     text-align: center;
     color: #31c231;
     border: 2px solid #31c231;
-    background-color: #cdffcd;
+    background-color: #8bd6966e;
     background-size: contain;
 }

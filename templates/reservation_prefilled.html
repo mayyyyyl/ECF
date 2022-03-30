@@ -5,14 +5,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 p-4 m-auto">
-                <label for="hotelIdSelected" class="form-label">Hotel :</label>
+                <label for="hotelIdSelected" class="form_label">Hotel</label>
                 <select class="form-select" name="hotelIdSelected" id="hotelIdSelected" disabled="{% if
                     nexturl==url_for('index_api.hotel_info')%}disabled{% endif %}" required>
                     <option value="{{ hotel.id }}">{{ hotel.name }}</option>
                 </select>
             </div>
             <div class="col-md-6 p-4 m-auto">
-                <label for="suiteIdSelected" class="form-label">Suite :</label>
+                <label for="suiteIdSelected" class="form_label">Suite</label>
                 <select class="form-select" name="suiteIdSelected" id="suiteIdSelected" required>
                     <option value="{{ suite.id }}">{{ suite.titre }}</option>
                 </select>

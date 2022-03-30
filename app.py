@@ -8,6 +8,7 @@ from flask_admin.contrib.peewee import ModelView
 import click
 import flask_login
 from flask_seasurf import SeaSurf
+from filters_jinja import dateformat
 # from flask_appbuilder import expose
 
 login_manager = flask_login.LoginManager()
@@ -25,6 +26,10 @@ login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
 
 admin = Admin(app, name='Easy Admin ', template_mode='bootstrap4')
+
+# Définition des filtres Jinja
+
+app.jinja_env.filters['dateformat'] = dateformat
 
 # Définition des modeles
 
