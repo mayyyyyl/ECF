@@ -1,7 +1,7 @@
-{% extends "footer.html" %}
+{% extends "navbar.html" %}
 {% block content %}
-<h1>Nos Etablisements</h1>
 <div class="container">
+    <h1>Nos Etablisements</h1>
     <div class="row">
         {% for hotel in hotels %}
         <div class="col-lg-4 col-md-12">
@@ -11,10 +11,12 @@
                     <h4 class="card-title">{{ hotel.name }}</h4>
                     <p class="card-subtitle">{{ hotel.address }}</p>
                     <p class="card-text"> {{ hotel.description }}</p>
-                    <form action="/hotels/hotel" method="get">
-                        <input for="hotelid" type="hidden" name="hotelid" value="{{ hotel.id }}"></input>
-                        <button type="submit" formmethod="get" class="btn btn-primary">En savoir plus</button>
-                    </form>
+                    <div class="col-md-12 text-center">
+                        <form action="/hotels/hotel" method="get">
+                            <input for="hotelid" type="hidden" name="hotelid" value="{{ hotel.id }}"></input>
+                            <button type="submit" formmethod="get" class="btn button">En savoir plus</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

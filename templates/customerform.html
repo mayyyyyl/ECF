@@ -1,25 +1,38 @@
-{% extends "layout.html" %}
+{% extends "footer.html" %}
 {% block title %}Créer un compte{% endblock %}
 {% block content %}
-<form class="row mb-3">
-    <div class="col-md-6">
-        <label for="first" class="form-label form_label">Prénom</label>
-        <input type="text" class="form-control" name="first" placeholder="Prénom" required maxlength="50">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a href="/"><img class="navbar-brand" src="/static/img/logo.png" /></a>
     </div>
-    <div class="col-md-6">
-        <label for="last" class="form-label form_label">Nom</label>
-        <input type="text" class="form-control" name="last" placeholder="Nom" required maxlength="50">
+</nav>
+<h1>Créer un compte</h1>
+<form class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <label for="first" class="form-label form_label">Prénom</label>
+            <input type="text" class="form-control" name="first" placeholder="Prénom" required maxlength="50">
+        </div>
+        <div class="col-md-4 mx-auto">
+            <label for="last" class="form-label form_label">Nom</label>
+            <input type="text" class="form-control" name="last" placeholder="Nom" required maxlength="50">
+        </div>
     </div>
-    <div class="col-md-4">
-        <label for="email" class="form-label form_label">Email</label>
-        <input type="email" class="form-control" name="email" placeholder="exemple@email.fr" required maxlength="50">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <label for="email" class="form-label form_label">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="exemple@email.fr" required
+                maxlength="50">
+        </div>
+        <div class="col-md-4 mx-auto">
+            <label for="password" class="form-label form_label">Mot de passe</label>
+            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required
+                maxlength="50">
+        </div>
     </div>
-    <div class="col-md-4">
-        <label for="password" class="form-label form_label">Mot de passe</label>
-        <input type="password" class="form-control" name="password" placeholder="mot de passe" required maxlength="50">
-    </div>
-    <div class="col-12 text-center">
-        <button type="submit" class="btn btn-primary" formmethod="post">Créer</button>
+    <div class="col-12 text-center p-5">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn button" formmethod="post">Créer</button>
     </div>
 </form>
 {% with messages = get_flashed_messages() %}

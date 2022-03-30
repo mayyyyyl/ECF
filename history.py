@@ -1,6 +1,7 @@
 from flask import Blueprint, flash, render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
 from app import Reservation, Customer
+from login import customer_required
 from utils_date import checkdate
 
 history_api = Blueprint('history_api', __name__)
@@ -8,20 +9,23 @@ history_api = Blueprint('history_api', __name__)
 
 @history_api.route("/mes-reservations")
 @login_required
+@customer_required
 def customer_reservations():
     """ Renvoie l'ensemble des réservations d'un client """
 
     customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
-    if not customer:
-        flash("Vous devez être connecté avec un compte client")
 
-    reservations = Reservation.select().where(Reservation.customer == customer.id).order_by(Reservation.datebeginning.desc())
-
-    return render_template("history.html", reservations=reservations)
+    if customer:
+        reservations = Reservation.select().where(Reservation.customer == customer.id).order_by(Reservation.datebeginning.desc())
+        return render_template("history.html", reservations=reservations)
+    else:
+        flash("Vous devez être connecté avec un compte client pour accéder à cette page.")
+        return redirect(url_for('index_api.index'))
 
 
 @history_api.route("/delete-reservation", methods=['POST'])
 @login_required
+@customer_required
 def reservation_del():
     """ Supprimer une reservation """
 

@@ -1,11 +1,12 @@
 /* Feuille de style */
 
 /* font style */
-@import url('https://fonts.googleapis.com/css2?family=Hind&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap'); /* Dancing Script (titre)*/
 
 /*------------------- Style page -------------------*/
 * {
-    font-family: 'Hind', sans-serif;
+    font-family: 'Popping', sans-serif;
 }
 html {
     display: block;
@@ -13,6 +14,121 @@ html {
     padding: 0;
     height: 100vh;
 }
+.container {
+    display: flex; 
+    flex-direction: column; 
+    /* height: 100vh; */
+}
+.footer {
+    height: 30px;
+    flex-shrink: 0; 
+  }
+
 .card-img-top {
     width: 15vw;
+}
+
+body {
+    background-color: #FFF8DE;
+}
+h1 {
+    color: #3F5C6C;
+    text-align: center;
+    font-family:'Dancing Script';
+    font-weight: 700;
+    margin: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+.logo {
+    width: 150px;
+    padding: 0.2rem;
+}
+/* Navbar */
+
+.navbar{
+    background-color: white;
+}
+.navbar-brand {
+    width: 5vw;
+    margin: 0.5rem;
+}
+.navbar-brand:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+#navbarNavDropdown {
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+.navbar-nav li {
+    padding: 0.5em;
+}
+.nav-link{
+    font-size: 1.1rem;
+}
+.nav-link:hover {
+    text-decoration:underline;
+    text-underline-offset: 0.5rem;
+    color: rgba(0,0,0,.55);
+}
+
+/* Card */
+
+.card-title {
+    color: #3F5C6C;
+    font-family: 'Dancing Script';
+    font-weight: 600;
+}
+.card-subtitle {
+    color: #3F5C6C;
+    opacity: 80%;
+}
+.card-text {
+    color: #3F5C6C;
+}
+.button:hover {
+    background-color: #C9D2DA;
+    color: black;
+}
+.button {
+    background-color: #88471B;
+    color: white;
+}
+/* Footer */
+.footer {
+    justify-content: center;
+    width: 100%;
+}
+/* login */
+.form-select {
+    margin-top: 2rem;
+    max-width: 50%;
+    margin: auto;
+}
+.form-select:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+.form_label {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 1.2rem;
+}
+#submit{
+    margin-top: 4.5rem;
+}
+/* Flash */
+
+#flash{
+    width: fit-content;
+}
+#flash_message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    color: #31c231;
+    border: 2px solid #31c231;
+    background-color: #cdffcd;
+    background-size: contain;
 }

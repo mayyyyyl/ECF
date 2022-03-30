@@ -1,7 +1,7 @@
-{% extends "footer.html" %}
+{% extends "navbar.html" %}
 {% block content %}
-<h1>Nos Suites</h1>
 <div class="container">
+    <h1>Nos Suites</h1>
     <div class="row">
         {% for suite in suites %}
         <div class="col-lg-4 col-md-12">
@@ -9,14 +9,16 @@
                 <img class="card-img-top" src="{{ suite.img }}" alt="photo de la suite">
                 <div class="card-body">
                     <h4 class="card-title">{{ suite.tire }}</h4>
-                    <p class="card-subtitle">{{ suite.link }}</p>
                     <p class="card-text"> {{ suite.description }}</p>
-                    <p class="card-price"> {{ suite.price }}</p>
-                    <form action="/reserver" method="get">
-                        <input for="suiteid" type="hidden" name="suiteid" value="{{ suite.id }}"></input>
-                        <input for="next" type="hidden" name="next" value="{{ request.path }}"></input>
-                        <button type="submit" formmethod="get" class="btn btn-primary">Réserver</button>
-                    </form>
+                    <p class="card-price"> {{ suite.price }} €</p>
+                    <p class="card-subtitle"><a href="{{ suite.link }}" target="_blank">Lien Booking</a></p>
+                    <div class="col-md-12 text-center">
+                        <form action="/reserver" method="get">
+                            <input for="suiteid" type="hidden" name="suiteid" value="{{ suite.id }}"></input>
+                            <input for="next" type="hidden" name="next" value="{{ request.path }}"></input>
+                            <button type="submit" formmethod="get" class="btn button">Réserver</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,19 @@
-{% extends "footer.html" %}
+{% extends "navbar.html" %}
 {% block content %}
-test page d'accueil
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="container justify-content-md-center" id="flash">
+    <p id="flash_message">{{ message }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1>Bienvenur sur notre site</h1>
+<h4>Venez vivre un moment fabuleux dans une nature somptueuse</h4>
+<p>Ici vous retrouverez les trois établissements qui forment le groupe Hypnos. Répartis sur le territoire français;
+    Nos établissements 4 étoiles m'attendent que vous ! <br>
+    Nos gérants mettant un point d'honneur à vous accueillir avec attention et discrétion, pour vous laisser la
+    possibilité de s'évader, de créer un moment hors du quotidien.
+</p>
 {% endblock %}

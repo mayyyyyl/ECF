@@ -1,4 +1,4 @@
-{% extends "footer.html" %}
+{% extends "navbar.html" %}
 {% block content %}
 <h1>Réservation</h1>
 <form>
@@ -33,12 +33,14 @@
             </div>
         </div>
         <div class="col-12 text-center p-4">
-            <button type="submit" class="btn btn-primary" formmethod="post">Envoyer</button>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn button" id="send_form" formmethod="post" hidden>Envoyer</button>
         </div>
     </div>
 </form>
 <div class="col-12 text-center p-4">
-    <button class="btn btn-primary" id="check_date" formmethod="post">Vérifier les disponibilités</button>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+    <button class="btn button" id="check_date" formmethod="post">Vérifier les disponibilités</button>
 </div>
 {% with messages = get_flashed_messages() %}
 {% if messages %}

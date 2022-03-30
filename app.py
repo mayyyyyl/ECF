@@ -7,6 +7,7 @@ from flask_admin import Admin
 from flask_admin.contrib.peewee import ModelView
 import click
 import flask_login
+from flask_seasurf import SeaSurf
 # from flask_appbuilder import expose
 
 login_manager = flask_login.LoginManager()
@@ -18,6 +19,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 db_wrapper = FlaskDB(app)
+csrf = SeaSurf(app)
 
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
@@ -144,6 +146,7 @@ from login import *
 from user import user_api
 from suite import suite_api
 from history import history_api
+from contact import contact_api
 
 app.register_blueprint(index_api)
 app.register_blueprint(reservation_api)
@@ -151,6 +154,7 @@ app.register_blueprint(login_api)
 app.register_blueprint(user_api)
 app.register_blueprint(suite_api)
 app.register_blueprint(history_api)
+app.register_blueprint(contact_api)
 
 # Commande permettant d'inisialiser la base de données
 

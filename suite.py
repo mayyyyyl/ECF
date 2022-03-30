@@ -51,7 +51,7 @@ def suite_add():
             return redirect(url_for('index_api.index'))
 
         else:
-            flash('Compte gérant pas trouvée dans la base')
+            flash('Compte gérant pas trouvée dans la base, vous n\'êtes pas connecté avec un compte gérant.')
             return redirect(url_for('suite_api.suite_add'), code=303)
 
     else:

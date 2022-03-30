@@ -1,4 +1,4 @@
-{% extends "footer.html" %}
+{% extends "navbar.html" %}
 {% block content %}
 <h1>Mes réservations</h1>
 {% if reservations %}
@@ -11,6 +11,7 @@
         <p>{{ r.dateend }}</p>
         <form action="/delete-reservation" method="post">
             <input for="reservationid" type="hidden" name="reservationid" value="{{ r.id }}"></input>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <button type="submit" formmethod="post" class="btn btn-danger">Supprimer</button>
         </form>
     </div>
