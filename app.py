@@ -97,7 +97,7 @@ class Suite(db_wrapper.Model):
 
 
 class Reservation(db_wrapper.Model):
-    suite = ForeignKeyField(Hotel, backref='reservation')
+    suite = ForeignKeyField(Suite, backref='reservation')
     customer = ForeignKeyField(Customer, backref='reservation')
     datebeginning = DateTimeField()
     dateend = DateTimeField()

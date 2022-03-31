@@ -14,9 +14,11 @@ def customer_reservations():
     """ Renvoie l'ensemble des réservations d'un client """
 
     customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
+    print(customer.id)
 
     if customer:
-        reservations = Reservation.select().where(Reservation.customer == customer.id).order_by(Reservation.datebeginning.desc())
+        reservations = Reservation.select(Reservation).where(Reservation.customer == customer.id).order_by(Reservation.datebeginning.desc())
+        print(reservations.count())
         return render_template("history.html", reservations=reservations)
     else:
         flash("Vous devez être connecté avec un compte client pour accéder à cette page.")
