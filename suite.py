@@ -1,5 +1,6 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template, jsonify
 from flask_login import current_user, login_required
+from werkzeug.utils import secure_filename
 from login import gerant_required
 from utils import *
 from app import Suite, Gerant
@@ -15,7 +16,7 @@ def suite_add():
 
     if request.method == 'POST':
         titre = request.form.get('titre').title()
-        img = request.form.get('img')
+        img = request.files['file']
         price = request.form.get('price')
         link = request.form.get('link')
         description = request.form.get('description')
@@ -26,9 +27,9 @@ def suite_add():
             flash('Titre de la suite invalide')
             error += 1
 
-        if not checkurl(link):
-            flash('Lien booking (url) invalide')
-            error += 1
+        # if not checkurl(link):
+        #     flash('Lien booking (url) invalide')
+        #     error += 1
 
         floatprice = convertingfloat(price)
 
@@ -42,7 +43,9 @@ def suite_add():
         gerant_hotel = Gerant.select().where(Gerant.user == current_user.id).get_or_none()
         if gerant_hotel:
             try:
-                Suite.create(titre=titre, img=img, description=description, price=floatprice, link=link, hotel=gerant_hotel.hotel)
+                img.save(f"./static/img/uploads/{secure_filename(img.filename)}")
+                print("img save")
+                Suite.create(titre=titre, img=img.filename, description=description, price=floatprice, link=link, hotel=gerant_hotel.hotel)
 
             except Exception:
                 flash("Une erreur inconnue est survenue")

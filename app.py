@@ -84,7 +84,7 @@ class Gerant(db_wrapper.Model):
 
 class Suite(db_wrapper.Model):
     titre = CharField()
-    img = BigBitField()
+    img = CharField()
     description = CharField()
     price = FloatField()
     link = CharField()
