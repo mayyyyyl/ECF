@@ -27,9 +27,9 @@ def suite_add():
             flash('Titre de la suite invalide')
             error += 1
 
-        # if not checkurl(link):
-        #     flash('Lien booking (url) invalide')
-        #     error += 1
+        if not checkurl(link):
+            flash('Lien booking invalide (url)')
+            error += 1
 
         floatprice = convertingfloat(price)
 
@@ -37,15 +37,20 @@ def suite_add():
             flash('Format du prix non valide')
             error += 1
 
+        # if not checkimg(img):
+        #     flash("Le fichier n'est pas une image")
+        #     error += 1
+
         if error:
             return redirect(url_for('suite_api.suite_add'))
 
         gerant_hotel = Gerant.select().where(Gerant.user == current_user.id).get_or_none()
         if gerant_hotel:
             try:
-                img.save(f"./static/img/uploads/{secure_filename(img.filename)}")
+                img_name = secure_filename(img.filename)
+                img.save(f"./static/img/uploads/{img_name}")
                 print("img save")
-                Suite.create(titre=titre, img=img.filename, description=description, price=floatprice, link=link, hotel=gerant_hotel.hotel)
+                Suite.create(titre=titre, img=img_name, description=description, price=floatprice, link=link, hotel=gerant_hotel.hotel)
 
             except Exception:
                 flash("Une erreur inconnue est survenue")

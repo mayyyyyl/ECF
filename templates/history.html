@@ -24,7 +24,7 @@
                     <p> Du {{ r.datebeginning|dateformat() }} au {{ r.dateend|dateformat() }}</p>
                     <form action="/delete-reservation" method="post">
                         <input for="reservationid" type="hidden" name="reservationid" value="{{ r.id }}"></input>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <!-- <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"> -->
                         <button type="submit" formmethod="post" class="btn btn-danger">Supprimer</button>
                     </form>
                 </div>
@@ -33,7 +33,13 @@
     </div>
     {% endfor %}
     {% else %}
-    <p> Vous n'avez pas de réservation pour le moment </p>
+    <p id="no_reservation"> Vous n'avez pas de réservation pour le moment </p>
+    <div class="d-flex align-items-center">
+        <p>C'est dommage...<br>N'hésitez pas à aller regarder nos différentes suites dans l'un de nos trois
+            établissements, en espérant vous
+            rencontrer bientôt !<br><br>L'équipe d'Hypnos</p>
+        <img src="/static/img/no_reservation.gif" id="sad_gif">
+    </div>
     {% endif %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
