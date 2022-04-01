@@ -72,11 +72,13 @@ def convertingfloat(nb_float):
 # Vérifie le fichier entré est une image
 
 
-def checkimg(filename):
+def checkimg(file_img):
     # filename = "/path/to/file.jpg"
 
-    print(filename)
-    if filetype.is_image(filename):
+    print(file_img)
+    if filetype.is_image(file_img.read()):
+        file_img.seek(0)
         return True
     else:
+        file_img.seek(0)
         return False

@@ -37,9 +37,9 @@ def suite_add():
             flash('Format du prix non valide')
             error += 1
 
-        # if not checkimg(img):
-        #     flash("Le fichier n'est pas une image")
-        #     error += 1
+        if not checkimg(img):
+            flash("Le fichier n'est pas une image")
+            error += 1
 
         if error:
             return redirect(url_for('suite_api.suite_add'))
