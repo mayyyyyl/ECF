@@ -1,6 +1,7 @@
 import hashlib
 import re
 import filetype
+import requests
 
 # Hash du mot de passe
 
@@ -54,8 +55,18 @@ def checkpassword(password):
 
 
 def checkurl(url):
-    regex = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)$"
-    return re.match(regex, url)
+    try:
+        get = requests.get(url)
+
+        if get.status_code == 200:
+            print(f"{url}: is reachable")
+            return True
+        else:
+            print(f"{url}: is Not reachable, status_code: {get.status_code}")
+            return False
+
+    except requests.exceptions.RequestException:
+        return False
 
 # Convertie les entrées en float
 
@@ -73,9 +84,7 @@ def convertingfloat(nb_float):
 
 
 def checkimg(file_img):
-    # filename = "/path/to/file.jpg"
 
-    print(file_img)
     if filetype.is_image(file_img.read()):
         file_img.seek(0)
         return True
