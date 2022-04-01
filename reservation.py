@@ -4,7 +4,7 @@ from app import Hotel, Reservation, Customer, Suite
 from datetime import datetime
 from login import customer_required
 from utils_date import *
-# from app import csrf
+from app import csrf
 
 reservation_api = Blueprint('reservation_api', __name__)
 
@@ -85,7 +85,7 @@ def reservation_prefilled():
 
 
 @reservation_api.route("/api/reservation", methods=['POST'])
-# @csrf.exempt
+@csrf.exempt
 @login_required
 @customer_required
 def checkdate():

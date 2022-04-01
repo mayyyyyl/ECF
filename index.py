@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, abort
+from flask import Blueprint, render_template, request
 from app import Hotel, Suite
 
 index_api = Blueprint('index_api', __name__)
@@ -28,7 +28,7 @@ def hotel_info():
     try:
         Hotel.get(Hotel.id == hotelid)
     except Exception:
-        abort(404, "Hotel inexistant")
+        return render_template("404.html", message="Hotel inexistant")
 
     suites = Suite.select().where(Suite.hotel == hotelid)
 
