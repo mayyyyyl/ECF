@@ -2,27 +2,31 @@
 
 /* font style */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap'); /* Dancing Script (titre)*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+/* Dancing Script (titre)*/
 
 /*------------------- Style page -------------------*/
 * {
     font-family: 'Popping', sans-serif;
 }
+
 html {
     display: block;
     margin: 0;
     padding: 0;
     height: 100vh;
 }
+
 .container {
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     /* height: 100vh; */
 }
+
 .footer {
     height: 30px;
-    flex-shrink: 0; 
-  }
+    flex-shrink: 0;
+}
 
 .card-img-top {
     width: 15vw;
@@ -31,68 +35,91 @@ html {
 body {
     background-color: #E1DACC;
 }
+
 h1 {
     color: #d63131;
     text-align: center;
-    font-family:'Dancing Script';
+    font-family: 'Dancing Script';
     font-weight: 700;
     margin: 1.3rem;
     padding-top: 0.6rem;
     margin-bottom: 1.2rem;
 }
+
 .logo {
     width: 150px;
     padding: 0.2rem;
 }
+
 .logout {
     width: 25px;
-    padding-right: 0.3rem ;
+    padding-right: 0.3rem;
 }
-.logout_link, .logout_link:hover {
+
+.logo:hover,
+.logout:hover,
+.logout_link:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.logout_link,
+.logout_link:hover {
     color: black;
     text-decoration: none;
     padding: 0.2rem;
 }
+
 .explication {
     color: rgb(133, 133, 133);
 }
+
 /* Navbar */
 
-.navbar{
+.navbar {
     background-color: whitesmoke;
 }
+
 .navbar-brand {
     width: 5vw;
     margin: 0.5rem;
 }
+
 .navbar-brand:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
+
 #navbarNavDropdown {
     justify-content: flex-end;
     padding-right: 2rem;
 }
+
 .navbar-nav li {
     padding: 0.5em;
 }
-.nav-link{
+
+.nav-link {
     font-size: 1.1rem;
     color: #756b5b;
 }
+
 .nav-link:hover {
-    text-decoration:underline;
+    text-decoration: underline;
     text-underline-offset: 0.5rem;
     text-decoration-color: #d63131;
     text-decoration-thickness: .2em;
 }
+
 .dropdown-item:hover {
     color: #d63131;
     background-color: #E1DACC;
 }
+
 /* Card */
 
-.card-title {
+.card-title,
+#no_reservation {
     color: #d63131;
     font-family: 'Dancing Script';
     font-size: 1.7em;
@@ -100,54 +127,69 @@ h1 {
     text-align: center;
     margin: 0.5rem;
 }
+
 .card-subtitle {
     color: #756b5b;
     font-size: .9em;
     margin: 0.8rem;
     padding-top: 0.5rem;
 }
-.card-text, .card-price{
+
+.card-text,
+.card-price {
     font-size: 1rem;
     margin: .8rem;
     margin-bottom: 1.2rem;
 }
+
 .card-price {
     text-align: center;
     font-style: italic;
     font-weight: 600;
 }
+
 .card-link {
     margin: .8rem;
     font-size: .9rem;
 }
+
 .link_booking {
     color: #756b5b;
 }
+
 .link_booking:hover {
     color: #78BE82;
 }
+
 .button:hover {
     background: #78BE82;
     color: white;
 }
+
 .button {
     margin: .6rem;
     background: linear-gradient(0.25turn, #d63131, #f16063);
     border: none;
     color: white;
 }
+
 /* Footer */
 .footer {
     justify-content: center;
     width: 100%;
     color: rgb(133, 133, 133);
 }
-.footer_link, .create_account:hover {
+
+.footer_link,
+.create_account:hover {
     color: rgb(133, 133, 133);
 }
-.footer_link:hover, .create_account {
+
+.footer_link:hover,
+.create_account {
     color: #d63131;
 }
+
 /* login */
 .form-select {
     margin-top: 2rem;
@@ -155,24 +197,29 @@ h1 {
     margin: auto;
     border-color: #d63131;
 }
+
 .form-select:disabled {
     border: 1px solid #999999;
     background-color: #cccccc;
     color: #666666;
 }
+
 .form_label {
     text-align: center;
     font-size: 1.2rem;
     padding: 1.2rem;
 }
-#submit{
+
+#submit {
     margin-top: 4.5rem;
 }
+
 /* Flash */
 
-#flash{
+#flash {
     width: fit-content;
 }
+
 #flash_message {
     margin-top: 1.5rem;
     padding: 1rem;
@@ -181,4 +228,8 @@ h1 {
     border: 2px solid #31c231;
     background-color: #8bd6966e;
     background-size: contain;
+}
+
+#sad_gif {
+    width: 18vw;
 }

@@ -1,5 +1,6 @@
 import hashlib
 import re
+import filetype
 
 # Hash du mot de passe
 
@@ -31,10 +32,6 @@ def checkpassword(password):
     lettresmin = 'abcdefghijklmnopqrstuvwxyz'
     lettremaj = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     chiffres = '0123456789'
-
-    if 12 >= len(password) >= 50:
-        print("pb longueur mp")
-        return False
 
     Minus = 0
     Majus = 0
@@ -71,3 +68,17 @@ def convertingfloat(nb_float):
 
     except Exception:
         return None
+
+# Vérifie le fichier entré est une image
+
+
+def checkimg(file_img):
+    # filename = "/path/to/file.jpg"
+
+    print(file_img)
+    if filetype.is_image(file_img.read()):
+        file_img.seek(0)
+        return True
+    else:
+        file_img.seek(0)
+        return False

@@ -10,6 +10,7 @@ import flask_login
 from flask_seasurf import SeaSurf
 from filters_jinja import dateformat
 # from flask_appbuilder import expose
+from flask_admin.form import SecureForm
 
 login_manager = flask_login.LoginManager()
 
@@ -21,6 +22,7 @@ app.config.from_object(__name__)
 
 db_wrapper = FlaskDB(app)
 csrf = SeaSurf(app)
+csrf.exempt_urls(('/admin',))
 
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
@@ -84,7 +86,7 @@ class Gerant(db_wrapper.Model):
 
 class Suite(db_wrapper.Model):
     titre = CharField()
-    img = BigBitField()
+    img = CharField()
     description = CharField()
     price = FloatField()
     link = CharField()
@@ -97,7 +99,7 @@ class Suite(db_wrapper.Model):
 
 
 class Reservation(db_wrapper.Model):
-    suite = ForeignKeyField(Hotel, backref='reservation')
+    suite = ForeignKeyField(Suite, backref='reservation')
     customer = ForeignKeyField(Customer, backref='reservation')
     datebeginning = DateTimeField()
     dateend = DateTimeField()
@@ -134,6 +136,7 @@ admin.add_view(ModelView(Suite))
 
 class HotelView(ModelView):
     column_exclude_list = ['id']
+    form_base_class = SecureForm
     # model_form_converter = CustomModelConverter
     # filter_converter = filters.FilterConverter()
     fast_mass_delete = False
@@ -178,7 +181,7 @@ def init_db():
         email = click.prompt('Your email address', type=str)
 
         newhotel = Hotel.create(name='Mon premier Hotel', address='9 Rue de la Fontaine Grillée', city='La Haie-Fouassière', description='ipsum in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque')
-        Suite.create(titre='Suite de reve', img='/static/img/hotel.jpg', description='description de la suite', price='300', link='https://www.booking.com/hotel/fr/holiday-home-bucolique.fr.html?aid=390156;label=duc511jc-1DCAsoTUIWaG9saWRheS1ob21lLWJ1Y29saXF1ZUgzWANoTYgBAZgBDbgBF8gBDNgBA-gBAYgCAagCA7gC3OLIkQbAAgHSAiQ1NTI1NmFkOC00Y2MzLTQ4MjAtYmNlNC1hM2RiYzFkOTJkM2LYAgTgAgE;sid=2b3a5887ae5f0c86c2fcc89e7a12a735;dist=0&keep_landing=1&sb_price_type=total&type=total&', hotel=newhotel.id)
+        Suite.create(titre='Suite de reve', img='Jules-Perline.jpg', description='description de la suite', price='300', link='https://www.booking.com/hotel/fr/holiday-home-bucolique.fr.html?aid=390156;label=duc511jc-1DCAsoTUIWaG9saWRheS1ob21lLWJ1Y29saXF1ZUgzWANoTYgBAZgBDbgBF8gBDNgBA-gBAYgCAagCA7gC3OLIkQbAAgHSAiQ1NTI1NmFkOC00Y2MzLTQ4MjAtYmNlNC1hM2RiYzFkOTJkM2LYAgTgAgE;sid=2b3a5887ae5f0c86c2fcc89e7a12a735;dist=0&keep_landing=1&sb_price_type=total&type=total&', hotel=newhotel.id)
 
         newadmin = User.create(firstname=first, lastname=last, email=email, password=hashingpassword(password))
         newclient = User.create(firstname='paul', lastname='Dupont', email='paul@email.fr', password=hashingpassword('paul'))
