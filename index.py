@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from app import Hotel, Suite
+from app import Hotel, Suite, basic_auth
 
 index_api = Blueprint('index_api', __name__)
 
@@ -20,6 +20,7 @@ def hotel_list():
 
 
 @index_api.route("/hotels/hotel")
+@basic_auth.required
 def hotel_info():
     """ Renvoie les informations d'un hotel """
 

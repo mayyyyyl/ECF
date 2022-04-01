@@ -9,28 +9,29 @@ import click
 import flask_login
 from flask_seasurf import SeaSurf
 from filters_jinja import dateformat
-# from flask_appbuilder import expose
 from flask_admin.form import SecureForm
 
 login_manager = flask_login.LoginManager()
 
+# Définition de la DB
 DATABASE = 'sqlite:///hotels.db'
 SECRET_KEY = '3RreRxY4kKWqUAq4'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-
 db_wrapper = FlaskDB(app)
+
+# Ajout de la protection csrf
 csrf = SeaSurf(app)
 csrf.exempt_urls(('/admin',))
 
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
 
+
 admin = Admin(app, name='Easy Admin ', template_mode='bootstrap4')
 
 # Définition des filtres Jinja
-
 app.jinja_env.filters['dateformat'] = dateformat
 
 # Définition des modeles
@@ -110,39 +111,30 @@ class Reservation(db_wrapper.Model):
         return super(Reservation, self).save(*args, **kwargs)
 
 
-# class AllView(ModelView):
+class AdminView(ModelView):
 
-#     def is_accessible(self):
-#         return login.current_user.is_authenticated
-
-#     def inaccessible_callback(self, name, **kwargs):
-#         return redirect(url_for('login_api.login'))
-# from flask_login.utils import current_user
+    def is_accessible(self):
+        return True
+        # return current_user.is_admin
 
 
-# class MyView(ModelView):
-#     @expose('/')
-#     def index(self):
-#         return self.render('admin/index.html')
-
-#     def is_accessible(self):
-#         return current_user.is_authenticated()
-
-# admin.add_view(MyView(ModelView))
-admin.add_view(ModelView(Gerant))
-admin.add_view(ModelView(User))
-admin.add_view(ModelView(Suite))
+admin.add_view(AdminView(Gerant))
+admin.add_view(AdminView(User))
 
 
-class HotelView(ModelView):
+class HotelView(AdminView):
     column_exclude_list = ['id']
     form_base_class = SecureForm
-    # model_form_converter = CustomModelConverter
-    # filter_converter = filters.FilterConverter()
     fast_mass_delete = False
 
 
 admin.add_view(HotelView(Hotel))
+admin.add_view(AdminView(Suite))
+
+# @app.route('/admin')
+# @basic_auth.required
+# def secret_view():
+#     return render_template('admin/master.html')
 
 
 # Import des Blueprints
