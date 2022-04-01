@@ -1,7 +1,7 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template
 from flask_login import login_user, logout_user, current_user
 from utils import hashingpassword
-from app import Gerant, User, Admin, Customer, login_manager
+from app import Gerant, User, login_manager
 from functools import wraps
 
 login_api = Blueprint('login_api', __name__)
@@ -58,20 +58,20 @@ def load_user(user_id):
     return User.get_or_none(User.id == user_id)
 
 
-def admin_required(view):
-    @wraps(view)
-    def wrapped_view(**kwargs):
-        """ Vérifie user connecté est un administrateur """
+# def admin_required(view):
+#     @wraps(view)
+#     def wrapped_view(**kwargs):
+#         """ Vérifie user connecté est un administrateur """
 
-        isadmin = Admin.select().where(Admin.user == current_user.id).get_or_none()
+#         isadmin = User.select().where(User.id == current_user.id, User.is_admin == True).get_or_none()
 
-        if isadmin is None:
-            flash('Vous devez être connecté en tant qu\'administrateur')
-            return redirect(url_for('login_api.login'))
+#         if isadmin is None:
+#             flash('Vous devez être connecté en tant qu\'administrateur')
+#             return redirect(url_for('login_api.login'))
 
-        return view(**kwargs)
+#         return view(**kwargs)
 
-    return wrapped_view
+#     return wrapped_view
 
 
 def gerant_required(view):
@@ -83,22 +83,6 @@ def gerant_required(view):
 
         if isgerant is None:
             flash('Vous devez être connecté en tant que gérant')
-            return redirect(url_for('login_api.login'))
-
-        return view(**kwargs)
-
-    return wrapped_view
-
-
-def customer_required(view):
-    @wraps(view)
-    def wrapped_view(**kwargs):
-        """ Vérifie user connecté est un customer """
-
-        iscustomer = Customer.select().where(Customer.user == current_user.id).get_or_none()
-
-        if iscustomer is None:
-            flash('Vous devez être connecté en tant que client')
             return redirect(url_for('login_api.login'))
 
         return view(**kwargs)

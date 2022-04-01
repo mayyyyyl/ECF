@@ -1,7 +1,7 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template
 from utils import *
 from peewee import IntegrityError
-from app import User, Customer
+from app import User
 
 user_api = Blueprint('user_api', __name__)
 
@@ -38,9 +38,8 @@ def custumer_add():
         hashed = hashingpassword(password)
 
         try:
-            # Création du user et customer
-            newuser = User.create(firstname=first, lastname=last, password=hashed, email=email)
-            Customer.create(user=newuser.id)
+            # Création du user
+            User.create(firstname=first, lastname=last, password=hashed, email=email)
 
         except IntegrityError:
             flash("Adresse email déjà utilisée")

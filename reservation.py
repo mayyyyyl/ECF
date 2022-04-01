@@ -1,8 +1,7 @@
 from flask import Blueprint, abort, request, render_template, flash, jsonify, redirect, url_for
 from flask_login import current_user, login_required
-from app import Hotel, Reservation, Customer, Suite
+from app import Hotel, Reservation, Suite
 from datetime import datetime
-from login import customer_required
 from utils_date import *
 from app import csrf
 
@@ -11,7 +10,6 @@ reservation_api = Blueprint('reservation_api', __name__)
 
 @reservation_api.route("/reservation", methods=['GET', 'POST'])
 @login_required
-@customer_required
 def reservation():
     """ Renvoie le formulaire pour reserver (GET), Envoie le formulaire (POST)"""
 
@@ -24,13 +22,12 @@ def reservation():
         start = str_to_datetime(request.form.get('start'))
         end = str_to_datetime(request.form.get('end'))
 
-        customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
-        if customer is None:
+        if current_user is None:
             flash("Compte client inexistant")
             return redirect(url_for('index_api.index'))
         else:
             try:
-                Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
+                Reservation.create(suite=suite, customer=current_user.id, datebeginning=start, dateend=end)
             except Exception:
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('reservation_api.reservation'))
@@ -43,7 +40,6 @@ def reservation():
 
 @reservation_api.route("/reserver", methods=['GET', 'POST'])
 @login_required
-@customer_required
 def reservation_prefilled():
     """ Renvoie le formulaire pour reserver (GET), Envoie le formulaire (POST)"""
 
@@ -56,13 +52,12 @@ def reservation_prefilled():
         start = str_to_datetime(request.form.get('start'))
         end = str_to_datetime(request.form.get('end'))
 
-        customer = Customer.select().where(Customer.user == current_user.id).get_or_none()
-        if customer is None:
+        if current_user is None:
             flash("Compte client inexistant")
             return redirect(url_for('index_api.index'))
         else:
             try:
-                Reservation.create(suite=suite, customer=customer.id, datebeginning=start, dateend=end)
+                Reservation.create(suite=suite, customer=current_user.id, datebeginning=start, dateend=end)
             except Exception:
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('reservation_api.reservation_prefilled'))
@@ -87,7 +82,6 @@ def reservation_prefilled():
 @reservation_api.route("/api/reservation", methods=['POST'])
 @csrf.exempt
 @login_required
-@customer_required
 def checkdate():
     """ Vérifie s'il n'y a pas déjà une réservation à ces dates """
 

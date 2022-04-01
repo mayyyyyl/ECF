@@ -28,7 +28,6 @@ csrf.exempt_urls(('/admin',))
 login_manager.init_app(app)
 login_manager.login_view = "login_api.login"
 
-
 admin = Admin(app, name='Easy Admin ', template_mode='bootstrap4')
 
 # Définition des filtres Jinja
@@ -43,6 +42,7 @@ class User(db_wrapper.Model, flask_login.UserMixin):
     email = CharField(unique=True)
     password = CharField()
     updated = DateTimeField(default=datetime.now)
+    is_admin = BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.updated = datetime.now()
@@ -58,14 +58,6 @@ class User(db_wrapper.Model, flask_login.UserMixin):
     @property
     def fullname(self):
         return f'{self.firstname} {self.lastname}'
-
-
-class Admin(db_wrapper.Model):
-    user = ForeignKeyField(User, backref='admin')
-
-
-class Customer(db_wrapper.Model):
-    user = ForeignKeyField(User, backref='customer')
 
 
 class Hotel(db_wrapper.Model):
@@ -101,7 +93,7 @@ class Suite(db_wrapper.Model):
 
 class Reservation(db_wrapper.Model):
     suite = ForeignKeyField(Suite, backref='reservation')
-    customer = ForeignKeyField(Customer, backref='reservation')
+    customer = ForeignKeyField(User, backref='reservation')
     datebeginning = DateTimeField()
     dateend = DateTimeField()
     updated = DateTimeField(default=datetime.now)
@@ -114,8 +106,8 @@ class Reservation(db_wrapper.Model):
 class AdminView(ModelView):
 
     def is_accessible(self):
-        return True
-        # return current_user.is_admin
+        # return True
+        return current_user.is_admin
 
 
 admin.add_view(AdminView(Gerant))
@@ -130,12 +122,6 @@ class HotelView(AdminView):
 
 admin.add_view(HotelView(Hotel))
 admin.add_view(AdminView(Suite))
-
-# @app.route('/admin')
-# @basic_auth.required
-# def secret_view():
-#     return render_template('admin/master.html')
-
 
 # Import des Blueprints
 
@@ -165,7 +151,7 @@ def init_db():
 
     try:
         with db_wrapper.database:
-            db_wrapper.database.create_tables([User, Admin, Gerant, Hotel, Suite, Customer, Reservation])
+            db_wrapper.database.create_tables([User, Gerant, Hotel, Suite, Reservation])
 
         first = click.prompt('Your first name', type=str)
         last = click.prompt('Your last name', type=str)
@@ -175,11 +161,9 @@ def init_db():
         newhotel = Hotel.create(name='Mon premier Hotel', address='9 Rue de la Fontaine Grillée', city='La Haie-Fouassière', description='ipsum in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque')
         Suite.create(titre='Suite de reve', img='Jules-Perline.jpg', description='description de la suite', price='300', link='https://www.booking.com/hotel/fr/holiday-home-bucolique.fr.html?aid=390156;label=duc511jc-1DCAsoTUIWaG9saWRheS1ob21lLWJ1Y29saXF1ZUgzWANoTYgBAZgBDbgBF8gBDNgBA-gBAYgCAagCA7gC3OLIkQbAAgHSAiQ1NTI1NmFkOC00Y2MzLTQ4MjAtYmNlNC1hM2RiYzFkOTJkM2LYAgTgAgE;sid=2b3a5887ae5f0c86c2fcc89e7a12a735;dist=0&keep_landing=1&sb_price_type=total&type=total&', hotel=newhotel.id)
 
-        newadmin = User.create(firstname=first, lastname=last, email=email, password=hashingpassword(password))
-        newclient = User.create(firstname='paul', lastname='Dupont', email='paul@email.fr', password=hashingpassword('paul'))
+        User.create(firstname=first, lastname=last, email=email, password=hashingpassword(password), is_admin=True)
+        User.create(firstname='paul', lastname='Dupont', email='paul@email.fr', password=hashingpassword('paul'))
         newgerant = User.create(firstname='jean', lastname='Dupont', email='jean@email.fr', password=hashingpassword('jean'))
-        Admin.create(user=newadmin.id)
-        Customer.create(user=newclient.id)
         Gerant.create(user=newgerant.id, hotel=newhotel.id)
 
     except Exception:
