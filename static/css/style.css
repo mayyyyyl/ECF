@@ -29,7 +29,8 @@ html {
 }
 
 .card-img-top {
-    width: 15vw;
+    width: auto;
+    height: auto;
 }
 
 body {
@@ -233,3 +234,19 @@ h1 {
 #sad_gif {
     width: 18vw;
 }
+
+/* Media queries */
+@media (max-width: 1400px) {}
+
+@media (max-width: 995px) {
+    .card {
+        margin: 0.8rem;
+        margin-bottom: 2.5rem;
+    }
+}
+
+@media (max-width: 860px) {}
+
+@media (max-width: 767px) {}
+
+@media (max-width: 426px) {}
