@@ -2,7 +2,7 @@ from flask import Blueprint, abort, request, render_template, flash, jsonify, re
 from flask_login import current_user, login_required
 from app import Hotel, Reservation, Suite
 from datetime import datetime
-from utils_date import *
+from utils.utils_date import *
 from app import csrf
 
 reservation_api = Blueprint('reservation_api', __name__)

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template
 from flask_login import login_user, logout_user, current_user
-from utils import hashingpassword
+from utils.utils_check import hashingpassword
 from app import Gerant, User, login_manager
 from functools import wraps
 

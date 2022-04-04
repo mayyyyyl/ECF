@@ -2,13 +2,13 @@ from flask import Flask
 from peewee import *
 from playhouse.flask_utils import FlaskDB
 from datetime import datetime
-from utils import hashingpassword
+from utils.utils_check import hashingpassword
 from flask_admin import Admin
 from flask_admin.contrib.peewee import ModelView
 import click
 import flask_login
 from flask_seasurf import SeaSurf
-from filters_jinja import dateformat
+from utils.filters_jinja import dateformat
 from flask_admin.form import SecureForm
 
 login_manager = flask_login.LoginManager()
@@ -124,13 +124,13 @@ admin.add_view(AdminView(Suite))
 # Import des Blueprints
 
 
-from index import index_api
-from reservation import reservation_api
-from login import *
-from user import user_api
-from suite import suite_api
-from history import history_api
-from contact import contact_api
+from route.index import index_api
+from route.reservation import reservation_api
+from route.login import *
+from route.user import user_api
+from route.suite import suite_api
+from route.history import history_api
+from route.contact import contact_api
 
 app.register_blueprint(index_api)
 app.register_blueprint(reservation_api)

@@ -1,8 +1,8 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template, jsonify
 from flask_login import current_user, login_required
 from werkzeug.utils import secure_filename
-from login import gerant_required
-from utils import *
+from route.login import gerant_required
+from utils.utils_check import *
 from app import Suite, Gerant
 
 suite_api = Blueprint('suite_api', __name__)

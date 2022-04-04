@@ -1,7 +1,7 @@
 from flask import Blueprint, flash, render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
 from app import Reservation
-from utils_date import checkdate
+from utils.utils_date import checkdate
 
 history_api = Blueprint('history_api', __name__)
 

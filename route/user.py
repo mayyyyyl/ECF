@@ -1,5 +1,5 @@
 from flask import Blueprint, request, flash, redirect, url_for, render_template
-from utils import *
+from utils.utils_check import *
 from peewee import IntegrityError
 from app import User
 
