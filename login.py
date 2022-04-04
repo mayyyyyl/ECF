@@ -58,22 +58,6 @@ def load_user(user_id):
     return User.get_or_none(User.id == user_id)
 
 
-# def admin_required(view):
-#     @wraps(view)
-#     def wrapped_view(**kwargs):
-#         """ Vérifie user connecté est un administrateur """
-
-#         isadmin = User.select().where(User.id == current_user.id, User.is_admin == True).get_or_none()
-
-#         if isadmin is None:
-#             flash('Vous devez être connecté en tant qu\'administrateur')
-#             return redirect(url_for('login_api.login'))
-
-#         return view(**kwargs)
-
-#     return wrapped_view
-
-
 def gerant_required(view):
     @wraps(view)
     def wrapped_view(**kwargs):

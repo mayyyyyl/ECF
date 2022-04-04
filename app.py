@@ -104,10 +104,8 @@ class Reservation(db_wrapper.Model):
 
 
 class AdminView(ModelView):
-
     def is_accessible(self):
-        # return True
-        return current_user.is_admin
+        return current_user.is_authenticated and current_user.is_admin
 
 
 admin.add_view(AdminView(Gerant))
