@@ -14,7 +14,7 @@ def customer_reservations():
         reservations = Reservation.select(Reservation).where(Reservation.customer == current_user.id).order_by(Reservation.datebeginning.desc())
         return render_template("history.html", reservations=reservations)
     else:
-        flash("Vous devez être connecté avec un compte client pour accéder à cette page.")
+        flash("Vous devez être connecté pour accéder à cette page.")
         return redirect(url_for('index_api.index'))
 
 

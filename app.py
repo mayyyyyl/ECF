@@ -65,11 +65,6 @@ class Hotel(db_wrapper.Model):
     address = CharField()
     city = CharField()
     description = CharField()
-    updated = DateTimeField(default=datetime.now)
-
-    def save(self, *args, **kwargs):
-        self.updated = datetime.now()
-        return super(Hotel, self).save(*args, **kwargs)
 
 
 class Gerant(db_wrapper.Model):
