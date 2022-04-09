@@ -1,4 +1,4 @@
-{% extends "navbar.html" %}
+{% extends "navbar_gerant.html" %}
 {% block title %}Ajouter une suite{% endblock %}
 {% block content %}
 <h1>Ajouter une suite</h1>
@@ -9,7 +9,7 @@
             <input type="text" class="form-control" name="titre" placeholder="Titre" required maxlength="50">
         </div>
         <div class="col-md-6">
-            <label for="price" class="form-label form_label">Price</label>
+            <label for="price" class="form-label form_label">Prix</label>
             <input type="text" class="form-control" name="price" placeholder="Prix" required maxlength="10">
         </div>
         <div class="col-md-6">
@@ -31,7 +31,7 @@
     </div>
     <div class="col-12 text-center p-5">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn btn-primary" formmethod="post">Ajouter</button>
+        <button type="submit" class="btn button" formmethod="post">Ajouter</button>
     </div>
 </form>
 {% with messages = get_flashed_messages() %}

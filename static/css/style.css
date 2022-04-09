@@ -234,6 +234,22 @@ h1 {
     width: 18vw;
 }
 
+.reservation {
+    display: inline-flex;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    background-color: white;
+    border-radius: .3rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.suite_name {
+    font-family: 'Dancing Script';
+    color: #d63131;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
 /* Media queries */
 @media (max-width: 1400px) {}
 

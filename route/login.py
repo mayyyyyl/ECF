@@ -48,7 +48,7 @@ def logout():
     """ Déconnecte le user """
 
     logout_user()
-    return redirect('/')
+    return redirect(url_for('index_api.index'))
 
 
 @login_manager.user_loader

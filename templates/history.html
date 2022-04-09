@@ -13,20 +13,24 @@
     </div>
     {% if reservations %}
     {% for r in reservations %}
-    <div class="total_stat col-12 align-items-center">
-        <img src="">
-        <div class=" container-fluid d-flex flex-column justify-content-center align-items-center">
-            <div class="row">
-                <p class="suite.name">{{ r.suite.titre }}</p>
-            </div>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p> Du {{ r.datebeginning|dateformat() }} au {{ r.dateend|dateformat() }}</p>
-                    <form action="/delete-reservation" method="post">
-                        <input for="reservationid" type="hidden" name="reservationid" value="{{ r.id }}"></input>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" formmethod="post" class="btn btn-danger">Supprimer</button>
-                    </form>
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col-md-12">
+                <div class="reservation col-md-12 align-items-center">
+                    <div class="suite_title row m-3">
+                        <p class="suite_name">{{ r.suite.titre }}</p>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-12 text-center">
+                            <p> Du {{ r.datebeginning|dateformat() }} au {{ r.dateend|dateformat() }}</p>
+                            <form action="/delete-reservation" method="post">
+                                <input for="reservationid" type="hidden" name="reservationid"
+                                    value="{{ r.id }}"></input>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" formmethod="post" class="btn button">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
