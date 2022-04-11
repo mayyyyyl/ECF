@@ -1,7 +1,7 @@
 {% extends "gerant/navbar.html" %}
 {% block content %}
 <div class="container">
-    <h1>{{ hotel.name }}</h1>
+    <h1>{{ hotel[0].name }}</h1>
     <div class="row mb-4">
         <div class="col-md-6">
             <p class="explication">Retrouvez ici la liste de nos suites</p>
@@ -13,7 +13,7 @@
     <div class="row">
         {% for s in hotel %}
         <div class="col-lg-4 col-md-12">
-            <div class="card">
+            <div class="card mb-5">
                 <img class="card-img-top" src="/static/img/uploads/{{ s.suite.img }}" alt="photo de la suite">
                 <div class="card-body">
                     <h4 class="card-title">{{ s.suite.titre }}</h4>

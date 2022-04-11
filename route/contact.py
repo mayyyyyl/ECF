@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
-from flask_login import login_required
+from flask_login import current_user, login_required
+from app import Gerant
 from utils.mail_to import send_mail
 
 contact_api = Blueprint('contact_api', __name__)
@@ -21,4 +22,7 @@ def contact():
 
         return render_template("contact.html")
     else:
+        gerant = Gerant.get_or_none(current_user.id == Gerant.user)
+        if gerant:
+            return render_template("gerant/contact.html")
         return render_template("contact.html")
