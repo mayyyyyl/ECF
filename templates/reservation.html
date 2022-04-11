@@ -4,7 +4,11 @@
 <form>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 p-4 m-auto">
+            <div class="col-md-12">
+                <p class="explication">Veuillez remplir le formulaire avant de vérifier les disponibilités ou de
+                    l'envoyer</p>
+            </div>
+            <div class="col-md-6 p-4 m-auto text-center">
                 <label for="hotelIdSelected" class="form_label">Hotel</label>
                 <select class="form-select" name="hotelIdSelected" id="hotelIdSelected" onchange=getsuites() required>
                     {% for hotel in hotels %}
@@ -12,7 +16,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="col-md-6 p-4 m-auto">
+            <div class="col-md-6 p-4 m-auto text-center">
                 <label for="suiteIdSelected" class="form_label">Suite</label>
                 <select class="form-select" name="suiteIdSelected" id="suiteIdSelected" required>
                 </select>

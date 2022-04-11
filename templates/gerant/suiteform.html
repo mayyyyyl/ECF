@@ -1,0 +1,48 @@
+{% extends "gerant/navbar.html" %}
+{% block title %}Ajouter une suite{% endblock %}
+{% block content %}
+<h1>Ajouter une suite</h1>
+<form class="container" enctype=multipart/form-data>
+    <div class="col-md-12">
+        <p class="explication">Veuillez remplir le formulaire avant de vérifier les disponibilités ou de
+            l'envoyer</p>
+    </div>
+    <div class="row mb-3 mx-auto text-center">
+        <div class="col-md-12">
+            <label for="titre" class="form-label form_label">Titre</label>
+            <input type="text" class="form-control" name="titre" placeholder="Titre" required maxlength="50">
+        </div>
+        <div class="col-md-6">
+            <label for="price" class="form-label form_label">Prix</label>
+            <input type="text" class="form-control" name="price" placeholder="Prix" required maxlength="10">
+        </div>
+        <div class="col-md-6">
+            <label for="link" class="form-label form_label">Lien Booking</label>
+            <input type="text" class="form-control" name="link" placeholder="URL de la page Booking" required
+                maxlength="150">
+        </div>
+        <div class="col-md-6">
+            <label for="description" class="form-label form_label">Description</label>
+            <input type="text" class="form-control" name="description" placeholder="Description" required
+                maxlength="500">
+        </div>
+        <div class="col-md-6">
+            <label for="img" class="form-label form_label">Photo de la suite</label>
+            <input type="file" name="file" accept="image/*" required>
+        </div>
+    </div>
+    <div class="col-12 text-center p-5">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn button" formmethod="post">Ajouter</button>
+    </div>
+</form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="container justify-content-md-center" id="flash">
+    {% for message in messages %}
+    <p id="flash_message">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% endblock %}

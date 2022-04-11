@@ -9,12 +9,31 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
-<h1>Bienvenue sur notre site</h1>
-<h4>Venez vivre un moment fabuleux dans une nature somptueuse</h4>
-<p>Ici vous retrouverez les trois établissements qui forment le groupe Hypnos. Répartis sur le territoire français;
-    Nos établissements 4 étoiles m'attendent que vous ! <br>
-    Nos gérants mettant un point d'honneur à vous accueillir avec attention et discrétion, pour vous laisser la
-    possibilité de s'évader, de créer un moment hors du quotidien.
-</p>
-<a class="btn button" href="{{ url_for('login_api.login') }}" role="button">Se connecter</a>
+<div class="container">
+    <h1>Bienvenue sur notre site</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Venez vivre un moment fabuleux dans une nature somptueuse</h4>
+            <p>Ici vous retrouverez les trois établissements qui forment le groupe Hypnos. Répartis sur le territoire
+                français;
+                Nos établissements 4 étoiles m'attendent que vous ! <br>
+                Nos gérants mettant un point d'honneur à vous accueillir avec attention et discrétion, pour vous laisser
+                la
+                possibilité de s'évader, de créer un moment hors du quotidien.
+            </p>
+            <div class="col-md-12 text-center">
+                <a class="btn button" href="{{ url_for('login_api.login') }}" role="button">Se connecter</a>
+            </div>
+        </div>
+        <div class="col-md-6 text-center"><img src="/static/img/hotel_index.jpg"></div>
+    </div>
+</div>
 {% endblock %}

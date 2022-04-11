@@ -1,0 +1,18 @@
+{% extends "gerant/navbar.html" %}
+{% block title %}Hypnos gerant{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Bienvenue sur votre espace {{ current_user.firstname|capitalize}}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Bonjour, </h4>
+            <p><br>Cette espace personnel, vous permetteras de maintenir les suites de votre
+                établissements accessibles depuis le site Hypnos.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="/static/img/index_gerant.jpg">
+        </div>
+    </div>
+
+</div>
+{% endblock %}

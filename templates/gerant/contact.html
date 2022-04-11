@@ -1,0 +1,38 @@
+{% extends "gerant/navbar.html" %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<main class="width=90vh" style="max-width: 1220px; 
+margin: 0 auto !important; ">
+    <div class="container-fluid header-admin p-3">
+        <h1>Contacter le support</h1>
+    </div>
+    <form>
+        <div class="col-12 d-flex flex-column align-items-center p-2">
+            <label class="form_label" for="topic">Objet de votre demande</label>
+            <select class="form-select mb-5" max-width="30%" name="topic">
+                <option value="réclamation">Je souhaite poser une réclamation</option>
+                <option value="service supplémentaire">Je souhaite commander un service supplémentaire</option>
+                <option value="en savoir plus">Je souhaite en savoir plus sur une suite</option>
+                <option value="soucis application">J’ai un souci avec cette application</option>
+            </select>
+            <div class="col-md-6 mb-4">
+                <textarea class="form-control" for="message" name="message" rows="5" placeholder="Message"
+                    required></textarea>
+            </div>
+        </div>
+        <div class="col-12 text-center p-4">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn button" formmethod="post">Envoyer</button>
+        </div>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="container justify-content-md-center" id="flash">
+        {% for message in messages %}
+        <p id="flash_message">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</main>
+{% endblock %}
