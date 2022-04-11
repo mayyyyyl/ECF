@@ -1,0 +1,58 @@
+{% extends "gerant/navbar.html" %}
+{% block content %}
+<h1>Mes réservations</h1>
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p class="explication">Retrouvez ici l'historique de vos réservations {{ current_user.firstname }}</p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a>
+        </div>
+    </div>
+    {% if reservations %}
+    {% for r in reservations %}
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col-md-12">
+                <div class="reservation col-md-12 align-items-center">
+                    <div class="suite_title row m-3">
+                        <p class="suite_name">{{ r.suite.titre }}</p>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-12 text-center">
+                            <p> Du {{ r.datebeginning|dateformat() }} au {{ r.dateend|dateformat() }}</p>
+                            <form action="/delete-reservation" method="post">
+                                <input for="reservationid" type="hidden" name="reservationid"
+                                    value="{{ r.id }}"></input>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" formmethod="post" class="btn button">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p id="no_reservation"> Vous n'avez pas de réservation pour le moment </p>
+    <div class="d-flex align-items-center">
+        <p>C'est dommage...<br>N'hésitez pas à aller regarder nos différentes suites dans l'un de nos trois
+            établissements, en espérant vous
+            rencontrer bientôt !<br><br>L'équipe d'Hypnos</p>
+        <img src="/static/img/no_reservation.gif" id="sad_gif">
+    </div>
+    {% endif %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="container justify-content-md-center" id="flash">
+        <p id="flash_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

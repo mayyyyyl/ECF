@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, render_template, request, abort, redirect, url_for
 from flask_login import current_user, login_required
-from app import Reservation
+from app import Reservation, Gerant
 from utils.utils_date import checkdate
 
 history_api = Blueprint('history_api', __name__)
@@ -12,6 +12,9 @@ def customer_reservations():
     """ Renvoie l'ensemble des réservations d'un client """
     if current_user:
         reservations = Reservation.select(Reservation).where(Reservation.customer == current_user.id).order_by(Reservation.datebeginning.desc())
+        gerant = Gerant.get_or_none(Gerant.user == current_user.id)
+        if gerant:
+            return render_template("gerant/myreservations.html", reservations=reservations)
         return render_template("history.html", reservations=reservations)
     else:
         flash("Vous devez être connecté pour accéder à cette page.")
