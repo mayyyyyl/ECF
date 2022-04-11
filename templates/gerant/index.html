@@ -1,0 +1,13 @@
+{% extends "gerant/navbar.html" %}
+{% block title %}Index gerant{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Index gerant</h1>
+    <p>Bonjour bienvenue sur votre espace gérant</p>
+    <p>Vous pouvez voir ici la page de votre etablissement</p><a href="{{ url_for('suite_api.suite_add') }}">mon
+        etablissement</a>
+    <p>Ici vous pouvez rajoutezr des suites à votre établisement</p><a
+        href="{{ url_for('index_api.hotel_info') }}?hotelid={{ current_user.hotel}}">Ajout suite</a>
+
+</div>
+{% endblock %}

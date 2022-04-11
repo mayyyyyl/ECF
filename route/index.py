@@ -13,6 +13,13 @@ def index():
     return render_template("index.html")
 
 
+@index_api.route("/gerant")
+def index_gerant():
+    """ Renvoie la page d'accueil pour les gérants """
+
+    return render_template("gerant/index.html")
+
+
 @index_api.route("/hotels")
 def hotel_list():
     """ Renvoie la liste des hotels """
@@ -30,11 +37,10 @@ def gerant_hotel():
     try:
         hotel = Hotel.select(Hotel, Gerant, Suite).join(Gerant).switch(Hotel).join(Suite).where(Gerant.user == current_user.id, Gerant.hotel == Hotel.id, Suite.hotel == Hotel.id)
         if hotel:
-            return render_template("hotel_gerant.html", hotel=hotel)
+            return render_template("gerant/etablissement.html", hotel=hotel)
         else:
             return render_template("404.html", message="Etablissement inexsitant")
     except Exception:
-        raise
         return render_template("404.html", message="Une erreur est survenue")
 
 

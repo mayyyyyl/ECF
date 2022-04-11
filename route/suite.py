@@ -53,17 +53,18 @@ def suite_add():
                 Suite.create(titre=titre, img=img_name, description=description, price=floatprice, link=link, hotel=gerant_hotel.hotel)
 
             except Exception:
+                raise
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('suite_api.suite_add'))
 
-            return redirect(url_for('index_api.index'))
+            return redirect(url_for('index_api.index_gerant'))
 
         else:
             flash('Compte gérant pas trouvée dans la base, vous n\'êtes pas connecté avec un compte gérant.')
             return redirect(url_for('suite_api.suite_add'), code=303)
 
     else:
-        return render_template('suiteform.html', suite=None)
+        return render_template('gerant/suiteform.html', suite=None)
 
 
 @suite_api.route("/api/suites")

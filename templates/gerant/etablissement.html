@@ -1,0 +1,30 @@
+{% extends "gerant/navbar.html" %}
+{% block content %}
+<div class="container">
+    <h1>{{ hotel.name }}</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p class="explication">Retrouvez ici la liste de nos suites</p>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a></div>
+    </div>
+    <div class="row">
+        {% for s in hotel %}
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <img class="card-img-top" src="/static/img/uploads/{{ s.suite.img }}" alt="photo de la suite">
+                <div class="card-body">
+                    <h4 class="card-title">{{ s.suite.titre }}</h4>
+                    <p class="card-text"> {{ s.suite.description }}</p>
+                    <p class="card-link"><a href="{{ s.suite.link }}" target="_blank" class="link_booking">Lien
+                            Booking</a></p>
+                    <p class="card-price"> {{ s.suite.price }} €</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

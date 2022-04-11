@@ -32,8 +32,13 @@ def login():
         else:
             # on démarre la session utilisateur
             if login_user(user):
-                nextroute = request.args.get('next', '/')
-                return redirect(nextroute, code=303)
+                gerant = Gerant.get_or_none(Gerant.user == user.id)
+                if gerant:
+                    nextroute = request.args.get('next', '/gerant')
+                    return redirect(nextroute, code=303)
+                else:
+                    nextroute = request.args.get('next', '/')
+                    return redirect(nextroute, code=303)
 
             else:
                 flash('Email ou mot de passe erroné')

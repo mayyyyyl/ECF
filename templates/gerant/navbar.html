@@ -1,0 +1,28 @@
+{% extends "footer.html" %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a href="/gerant"><img class="navbar-brand" src="/static/img/logo.png" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('index_api.index') }}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index_api.gerant_hotel') }}">Mon Etablisement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('suite_api.suite_add') }}">Ajouter un suite</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('history_api.customer_reservations') }}">Mes réservations</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}

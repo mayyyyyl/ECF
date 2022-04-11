@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mb-4">
         <div class="col-md-6">
-            <p class="explication">Retrouvez ici l'historique de vos réservations</p>
+            <p class="explication">Retrouvez ici l'historique de vos réservations {{ current_user.firstname }}</p>
         </div>
         <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
                 href="{{ url_for('login_api.logout') }}"><img class="logout"
