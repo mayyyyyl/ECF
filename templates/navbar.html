@@ -13,7 +13,7 @@
                     <a class="nav-link active" aria-current="page" href="{{ url_for('index_api.index') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('index_api.hotel_list') }}">Nos Etablisements</a>
+                    <a class="nav-link" href="{{ url_for('index_api.hotel_list') }}">Nos Etablissements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('reservation_api.reservation') }}">Réserver</a>
@@ -24,7 +24,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Nos Etablisements en détails
+                        Nos Etablissements en détails
                     </a>
                     <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ url_for('index_api.hotel_info') }}?hotelid=1">Hotel 1</a>

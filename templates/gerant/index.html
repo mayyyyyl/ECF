@@ -3,13 +3,20 @@
 {% block content %}
 <div class="container">
     <h1>Bienvenue sur votre espace {{ current_user.firstname|capitalize}}</h1>
-    <p>Bonjour, <br><br>
-        Cette espace personnel, vous permetteras de maintenir les suites de votre
-        établissements accessibles depuis le site Hypnos.</p>
-    <p>Vous pouvez voir ici la page de votre etablissement</p><a href="{{ url_for('suite_api.suite_add') }}">mon
-        etablissement</a>
-    <p>Ici vous pouvez rajoutezr des suites à votre établisement</p><a
-        href="{{ url_for('index_api.hotel_info') }}?hotelid={{ current_user.hotel}}">Ajout suite</a>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Bonjour, <br><br>
+                Cette espace personnel, vous permetteras de maintenir les suites de votre
+                établissements accessibles depuis le site Hypnos.</p>
+            <p>Vous pouvez voir ici la page de votre etablissement</p><a href="{{ url_for('suite_api.suite_add') }}">mon
+                etablissement</a>
+            <p>Ici vous pouvez rajoutezr des suites à votre établisement</p><a
+                href="{{ url_for('index_api.hotel_info') }}?hotelid={{ current_user.hotel}}">Ajout suite</a>
+        </div>
+        <div class="col-md-6">
+            <img src="/static/img/index_gerant.jpg">
+        </div>
+    </div>
 
 </div>
 {% endblock %}
