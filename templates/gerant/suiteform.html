@@ -3,9 +3,11 @@
 {% block content %}
 <h1>Ajouter une suite</h1>
 <form class="container" enctype=multipart/form-data>
-    <div class="col-md-12">
-        <p class="explication">Veuillez remplir le formulaire avant de vérifier les disponibilités ou de
-            l'envoyer</p>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="explication">Veuillez remplir le formulaire avant de vérifier les disponibilités ou de
+                l'envoyer</p>
+        </div>
     </div>
     <div class="row mb-3 mx-auto text-center">
         <div class="col-md-12">
@@ -28,12 +30,14 @@
         </div>
         <div class="col-md-6">
             <label for="img" class="form-label form_label">Photo de la suite</label>
-            <input type="file" name="file" accept="image/*" required>
+            <input type="file" name="file" accept="image/*" class="form-control" required>
         </div>
     </div>
-    <div class="col-12 text-center p-5">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn button" formmethod="post">Ajouter</button>
+    <div class="row">
+        <div class="col-12 text-center p-5">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn button" formmethod="post">Ajouter</button>
+        </div>
     </div>
 </form>
 {% with messages = get_flashed_messages() %}
