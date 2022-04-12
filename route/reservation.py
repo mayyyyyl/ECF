@@ -25,6 +25,19 @@ def reservation():
         if current_user is None:
             flash("Compte client inexistant")
             return redirect(url_for('index_api.index'))
+
+        tests = []
+
+        tests.append(valideperiod(start, end))
+        tests.append(periodlength(start, end))
+        tests.append(pastperiod(start, end))
+        tests.append(overlapperiod(suite, start))
+        tests.append(overlapperiod(suite, end))
+
+        if not all(tests):
+            flash("Une erreur inconnue est survenue")
+            return redirect(url_for('reservation_api.reservation'))
+
         else:
             try:
                 Reservation.create(suite=suite, customer=current_user.id, datebeginning=start, dateend=end)
@@ -55,6 +68,18 @@ def reservation_prefilled():
         if current_user is None:
             flash("Compte client inexistant")
             return redirect(url_for('index_api.index'))
+
+        tests = []
+
+        tests.append(valideperiod(start, end))
+        tests.append(periodlength(start, end))
+        tests.append(pastperiod(start, end))
+        tests.append(overlapperiod(suite, start))
+        tests.append(overlapperiod(suite, end))
+
+        if not all(tests):
+            flash("Une erreur inconnue est survenue")
+            return redirect(url_for('reservation_api.reservation'))
         else:
             try:
                 Reservation.create(suite=suite, customer=current_user.id, datebeginning=start, dateend=end)
