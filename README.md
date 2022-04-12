@@ -15,6 +15,7 @@ Cette application est codée en python avec le framework Flask. Vous pouvez le d
   - git clone git@github.com:mayyyyyl/ECF.git
   - python -m -venv -venv
   - pip install -r requirements.txt
+  - flask init_db (permet d'initialiser la base de données et de créer un administrateur)
   - $env:FLASK_ENV = "development"
   - flask run
  ```
