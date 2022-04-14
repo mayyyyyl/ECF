@@ -14,6 +14,8 @@ def index():
 
 
 @index_api.route("/gerant")
+@login_required
+@gerant_required
 def index_gerant():
     """ Renvoie la page d'accueil pour les gérants """
 

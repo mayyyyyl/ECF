@@ -9,7 +9,6 @@ import click
 import flask_login
 from flask_seasurf import SeaSurf
 from utils.filters_jinja import dateformat
-from flask_admin.form import SecureForm
 
 login_manager = flask_login.LoginManager()
 
@@ -105,16 +104,8 @@ class AdminView(ModelView):
 
 admin.add_view(AdminView(Gerant))
 admin.add_view(AdminView(User))
+admin.add_view(AdminView(Hotel))
 
-
-class HotelView(AdminView):
-    column_exclude_list = ['id']
-    form_base_class = SecureForm
-    fast_mass_delete = False
-
-
-admin.add_view(HotelView(Hotel))
-admin.add_view(AdminView(Suite))
 
 # Import des Blueprints
 

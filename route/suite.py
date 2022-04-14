@@ -53,7 +53,6 @@ def suite_add():
                 Suite.create(titre=titre, img=img_name, description=description, price=floatprice, link=link, hotel=gerant_hotel.hotel)
 
             except Exception:
-                raise
                 flash("Une erreur inconnue est survenue")
                 return redirect(url_for('suite_api.suite_add'))
 

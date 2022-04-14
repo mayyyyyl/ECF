@@ -47,7 +47,7 @@ def overlapperiod(suiteid, date):
             r.dateend = datetime.now()
 
         if r.datebeginning <= date <= r.dateend:
-            message_error.append("Période qui se chevauche")
+            message_error.append("Date indisponible")
             return False
     return True
 
