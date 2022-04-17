@@ -29,7 +29,7 @@ def custumer_add():
             error += 1
 
         if not checkpassword(password):
-            flash("Le mot de passe n'est pas valide")
+            flash("Le mot de passe n'est pas valide, il doit comporter au moins un chiffre, une majuscule, un minuscule et un caractère spécial.")
             error += 1
 
         if error:
