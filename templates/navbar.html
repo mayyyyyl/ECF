@@ -21,20 +21,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('history_api.customer_reservations') }}">Mes réservations</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Nos Etablissements en détails
-                    </a>
-                    <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{ url_for('index_api.hotel_info') }}?hotelid=1">Hotel 1</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{{ url_for('index_api.hotel_info') }}?hotelid=2">Hotel 2</a>
-                        </li>
-                        <li><a class="dropdown-item" href="{{ url_for('index_api.hotel_info') }}?hotelid=3">Hotel 3</a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </div>

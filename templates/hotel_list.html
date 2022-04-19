@@ -1,7 +1,7 @@
 {% extends "navbar.html" %}
 {% block content %}
 <div class="container">
-    <h1>Nos Etablisements</h1>
+    <h1>Nos Etablissements</h1>
     <div class="row mb-4">
         <div class="col-md-6">
             <p class="explication">Retrouvez ici la liste de nos établissements</p>
@@ -17,7 +17,7 @@
                 <img class="card-img-top" src="/static/img/hotel.jpg" alt="photo de l'hotel">
                 <div class="card-body">
                     <h4 class="card-title">{{ hotel.name }}</h4>
-                    <p class="card-subtitle">{{ hotel.address }}</p>
+                    <p class="card-subtitle">{{ hotel.address }}, {{ hotel.city }}</p>
                     <p class="card-text"> {{ hotel.description }}</p>
                     <div class="col-md-12 text-center">
                         <form action="/hotels/hotel" method="get">

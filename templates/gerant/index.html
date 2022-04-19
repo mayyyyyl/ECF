@@ -3,14 +3,22 @@
 {% block content %}
 <div class="container">
     <h1>Bienvenue sur votre espace {{ current_user.firstname|capitalize}}</h1>
+    <div class="row mb-4">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center"><a class="logout_link"
+                href="{{ url_for('login_api.logout') }}"><img class="logout"
+                    src="/static/img/logout.png">Déconnexion</a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <h4>Bonjour, </h4>
-            <p><br>Cette espace personnel, vous permetteras de maintenir les suites de votre
-                établissements accessibles depuis le site Hypnos.</p>
+            <p><br>Cette espace personnel, vous permetteras d'ajouter les suites de votre
+                établissement accessible sur le site Hypnos.</p>
         </div>
         <div class="col-md-6">
-            <img src="/static/img/index_gerant.jpg">
+            <img src="/static/img/index_gerant.jpg" style="width: 45vw;">
         </div>
     </div>
 

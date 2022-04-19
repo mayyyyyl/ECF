@@ -2,7 +2,6 @@
 
 /* font style */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap');
-/* Dancing Script (titre)*/
 
 /*------------------- Style page -------------------*/
 * {
@@ -19,7 +18,6 @@ html {
 .container {
     display: flex;
     flex-direction: column;
-    /* height: 100vh; */
 }
 
 .footer {
@@ -28,8 +26,8 @@ html {
 }
 
 .card-img-top {
-    width: auto;
-    height: auto;
+    max-width: 669px;
+    max-height: 440px;
 }
 
 body {
@@ -190,7 +188,7 @@ h1 {
     color: #d63131;
 }
 
-/* login */
+/* Login */
 .form-select {
     margin-top: 2rem;
     max-width: 50%;
