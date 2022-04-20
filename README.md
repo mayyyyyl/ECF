@@ -6,7 +6,7 @@ Dans le cadre de ma formation, j'ai réalisé l'application d'un groupe hôtelie
 ## Le Projet Hypnos
 Le projet est actuellement déployé avec Heroku, vous pouvez le retrouver à cette URL : https://hypnos-ecf.herokuapp.com/ 
 
-## En local
+## En Local
 Cette application est codée en python avec le framework Flask. Vous pouvez le déployer en local en effectuant les commandes suivantes:
 
 ```

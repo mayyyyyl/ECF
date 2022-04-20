@@ -89,5 +89,18 @@ insert into reservation (id, customer_id, suite_id, datebeginning, dateend) valu
 insert into reservation (id, customer_id, suite_id, datebeginning, dateend) values (4, 2, 4, '2021-10-30 21:57:51', '2021-09-19 07:45:05');
 insert into reservation (id, customer_id, suite_id, datebeginning, dateend) values (5, 3, 1, '2021-11-15 11:28:06', '2021-10-10 21:21:01');
 
+/* Supprimer des données */
+
+DELETE FROM user where user.id = 1;
+DROP TABLE gerant;
+DELETE FROM suite where suite.id = 7;
+
+/* Selectionner le nom et le prix des suites de l'hôtel avec l'id numéro 1 */
+
+SELECT suite.titre AS `Nom de la suite`, suite.price AS `Prix`
+FROM suite
+WHERE suite.hotel_id = 1;
+
+
 /* Utilisation d'un utilitaire de sauvegarde et restauration de la base de données */
 mysqldump -u root -p hotel > hotel.sql
