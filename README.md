@@ -13,6 +13,7 @@ Cette application est codée en python avec le framework Flask. Vous pouvez le d
   - Placez-vous dans un nouveau dossier
   - Lancer un terminal powershell
   - git clone git@github.com:mayyyyyl/ECF.git
+  - cd ECF
   - python -m -venv -venv
   - venv\scripts\activate.ps1
   - pip install -r requirements.txt
