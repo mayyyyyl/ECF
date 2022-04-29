@@ -18,6 +18,7 @@ Cette application est codée en python avec le framework Flask. Vous pouvez le d
   - venv\scripts\activate.ps1
   - pip install -r requirements.txt
   - flask init_db (permet d'initialiser la base de données et de créer un administrateur)
+  (si une erreur survient supprimer la base de données et recommencer la commande)
   - $env:FLASK_ENV = "development"
   - flask run
  ```
